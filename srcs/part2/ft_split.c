@@ -6,63 +6,74 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 16:55:44 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/07 17:53:24 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/07 21:49:34 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	ft_addword(char *dst, const char *src, int start, char c)
+static size_t	ft_word_len(char const *s, char c, size_t i)
 {
-	size_t	i;
+	size_t		len;
 
-	i = 0;
-	while (dst[i])
+	len = 0;
+	while (s[i] != c && s[i])
 	{
-		if (dst[i])
-		dst[i] = src[start];
+		len++;
 		i++;
-		start++;
 	}
+	return (len);
 }
 
-static size_t	ft_conterword(const char *str, char c)
-{
-	size_t	i;
-	size_t	conter;
 
-	conter = 0;
+static size_t	ft_count_words(char const *s, char c)
+{
+	size_t		i;
+	size_t		count;
+
 	i = 0;
-	while (str[i])
+	count = 0;
+	while (s[i])
 	{
-		if (str[i] == c && str[i + 1] != c)
-			++conter;
-		i++;
+		while (s[i] == c)
+			i++;
+		if (s[i] != c && s[i] != '\0')
+			count++;
+		while (s[i] != c && s[i] != '\0')
+			i++;
 	}
-	return (conter);
+	return (count);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**res;
-	size_t	i;
-	size_t	j;
+	char	**tab;
+	size_t		i;
+	size_t		j;
+	size_t		k;
 
 	i = 0;
 	j = 0;
 	if (!s)
 		return (NULL);
-	res = (char *)malloc(sizeof(char *) * (ft_conterword(s, c) + 1));
-	if (!res)
+	tab = (char **)malloc(sizeof(char *) * (ft_count_words(s, c) + 1));
+	if (!tab)
 		return (NULL);
-	while (res[i])
+	while (s[i])
 	{
-		if (res[i] == c && res[i + 1] != c)
+		k = 0;
+		while (s[i] == c)
+			i++;
+		if (s[i] != c && s[i])
 		{
-
+			tab[j] = (char *)malloc(sizeof(char) * (ft_word_len(s, c, i) + 1));
+			if (!tab[j])
+				return (NULL);
+			while (s[i] != c && s[i])
+				tab[j][k++] = s[i++];
+			tab[j++][k] = '\0';
 		}
-		i++;
 	}
-	res[i] = '\n';
-	return (res);
+	tab[j] = NULL;
+	return (tab);
 }

@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:55:28 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/07 18:18:28 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/07 21:18:38 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,42 @@
 
 static int	ft_intlen(long n)
 {
-	int	size;
+	int		len;
 
-	size = 0;
-	while (n)
+	len = 0;
+	if (n < 0)
+	{
+		n = -n;
+		len++;
+	}
+	while (n > 0)
 	{
 		n /= 10;
-		size++;
+		len++;
 	}
-	return (size);
+	return (len);
 }
 
 char	*ft_itoa(int n)
 {
-	char	*res;
-	long	nbr;
-	size_t	i;
+	char	*str;
+	int		size;
+	int		sign;
 
+	sign = 1;
 	if (n < 0)
-		nbr = -n;
-	else
-		nbr = n;
-	res = (char)malloc(sizeof(char) * ft_intlen(nbr));
-	if (!res)
+		sign = -1;
+	size = ft_intlen(n);
+	str = (char *)malloc(sizeof(char) * (size + 1));
+	if (!str)
 		return (NULL);
-	i = 0;
-	if (n < 0)
-		res[i++] = '-';
-	while (n)
+	str[size] = '\0';
+	while (size--)
 	{
-		res[i++] = (n % 10);
+		str[size] = (n % 10) * sign + '0';
 		n /= 10;
 	}
-	return (res);
+	if (sign == -1)
+		str[0] = '-';
+	return (str);
 }
