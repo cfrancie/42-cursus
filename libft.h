@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:57:07 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/07 22:00:57 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/07 22:46:21 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,16 @@ void	*ft_memmove(void *dest, const void *src, size_t n);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 char	*ft_strchr(const char *s, int c);
-int		strncmp(const char *s1, const char *s2, size_t n);
-void	*memchr(const void *s, int c, size_t n);
-int		memcmp(const void *s1, const void *s2, size_t n);
-char	*strnstr(const char	*big, const char *little, size_t len);
-int		atoi(const char *nptr);
+char    *ft_strrchr(const char *s, int c);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+void	*ft_memchr(const void *s, int c, size_t n);
+int		ft_memcmp(const void *s1, const void *s2, size_t n);
+char	*ft_strnstr(const char	*big, const char *little, size_t len);
 
 //  stdlib
-int		atoi(const char *nptr);
-char	*strdup(const char *s);
-void	*calloc(size_t nmemb, size_t size);
+int		ft_atoi(const char *nptr);
+char	*ft_strdup(const char *s);
+void	*ft_calloc(size_t nmemb, size_t size);
 
 // part 2
 char	*ft_substr(char const *s, unsigned int start, size_t len);

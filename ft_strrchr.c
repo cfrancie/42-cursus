@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 11:53:44 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/07 11:54:29 by cfrancie         ###   ########.fr       */
+/*   Created: 2022/11/07 22:44:44 by cfrancie          #+#    #+#             */
+/*   Updated: 2022/11/07 22:48:17 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	tolower(int c)
+#include "libft.h"
+
+char *ft_strrchr(const char *s, int c)
 {
-	if (c >= 'A' && c <= 'Z')
-		return (c + 32);
-	return (c);
+    size_t  i;
+
+    i = ft_strlen(s);
+    while (i > 0 && s[i] != (char)c)
+        i--;
+    if (s[i] == (char)c)
+        return ((char *)&s[i]);
+    return (NULL);
 }

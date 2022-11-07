@@ -6,9 +6,11 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 22:05:24 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/07 22:06:03 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/07 22:47:10 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 void    ft_putendl_fd(char *s, int fd)
 {
