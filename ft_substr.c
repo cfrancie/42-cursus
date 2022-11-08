@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:38:38 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/07 16:11:33 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/08 19:10:43 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,14 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	i = 0;
 	j = 0;
-	while (s[i] && i < start)
-		i++;
-	while (s[i] && j < len)
+	while (s[i])
 	{
-		res[i] = s[i];
+		if (i >= start && j < len)
+		{
+			res[j] = s[i];
+			j++;
+		}
 		i++;
-		j++;
 	}
 	res[j] = '\0';
 	return (res);

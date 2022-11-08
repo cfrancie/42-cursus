@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:55:28 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/07 21:18:38 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/08 19:23:53 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static int	ft_intlen(long n)
 	int		len;
 
 	len = 0;
+	if (n == 0)
+		return (1);
 	if (n < 0)
 	{
 		n = -n;

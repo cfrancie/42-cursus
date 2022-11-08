@@ -6,74 +6,72 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 16:55:44 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/07 21:49:34 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/08 13:37:15 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_word_len(char const *s, char c, size_t i)
+static int	ft_count_words(char const *s, char c)
 {
-	size_t		len;
+	int		count;
+	int		word;
+	size_t	i;
 
-	len = 0;
-	while (s[i] != c && s[i])
-	{
-		len++;
-		i++;
-	}
-	return (len);
-}
-
-
-static size_t	ft_count_words(char const *s, char c)
-{
-	size_t		i;
-	size_t		count;
-
-	i = 0;
 	count = 0;
+	word = 0;
 	while (s[i])
 	{
-		while (s[i] == c)
-			i++;
-		if (s[i] != c && s[i] != '\0')
+		if (s[i] != c && word == 0)
+		{
+			word = 1;
 			count++;
-		while (s[i] != c && s[i] != '\0')
-			i++;
+		}
+		else if (s[i] == c)
+			word = 0;
+		i++;
 	}
 	return (count);
 }
 
-char	**ft_split(char const *s, char c)
+static char	*ft_addword(char const *s, size_t start, size_t finish)
 {
-	char	**tab;
-	size_t		i;
-	size_t		j;
-	size_t		k;
+	char	*str;
+	int		i;
 
 	i = 0;
+	str = malloc(sizeof(char) * (finish - start + 1));
+	while (start < finish)
+		str[i++] = s[start++];
+	str[i] = '\0';
+	return (str);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**res;
+	size_t	i;
+	size_t	j;
+	int		tmp;
+
+	res = malloc(sizeof(char *) * (ft_count_words(s, c) + 1));
+	if (!s || !res)
+		return (NULL);
+	tmp = -1;
+	i = 0;
 	j = 0;
-	if (!s)
-		return (NULL);
-	tab = (char **)malloc(sizeof(char *) * (ft_count_words(s, c) + 1));
-	if (!tab)
-		return (NULL);
-	while (s[i])
+	while (i <= ft_strlen(s))
 	{
-		k = 0;
-		while (s[i] == c)
-			i++;
-		if (s[i] != c && s[i])
+		if (s[i] != c && tmp < 0)
+			tmp = i;
+		else if ((s[i] == c || i == ft_strlen(s)) && tmp >= 0)
 		{
-			tab[j] = (char *)malloc(sizeof(char) * (ft_word_len(s, c, i) + 1));
-			if (!tab[j])
-				return (NULL);
-			while (s[i] != c && s[i])
-				tab[j][k++] = s[i++];
-			tab[j++][k] = '\0';
+			res[j] = ft_addword(s, tmp, i);
+			tmp = -1;
+			j++;
 		}
+		i++;
 	}
-	tab[j] = NULL;
-	return (tab);
+	res[j] = NULL;
+	return (res);
 }
