@@ -6,7 +6,7 @@
 #    By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/08 19:04:31 by cfrancie          #+#    #+#              #
-#    Updated: 2022/11/09 13:53:52 by cfrancie         ###   ########.fr        #
+#    Updated: 2022/11/09 19:09:40 by cfrancie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,16 +23,12 @@ OBJS_B	= $(SRCS_B:.c=.o)
 CC		= gcc
 RM		= rm -f
 CFLAGS	= -Wall -Wextra -Werror -I.
-
 NAME	= libft.a
 
-all:	$(NAME)
+all:			$(NAME)
 
-$(NAME):	$(OBJS)
+$(NAME):		$(OBJS)
 	ar rcs $(NAME) $(OBJS)
-
-bonus: $(OBJS_B)
-	ar rcs $(NAME) $(OBJS_B)
 
 clean:
 	$(RM) $(OBJS) $(OBJS_B)
@@ -41,5 +37,8 @@ fclean:	clean
 	$(RM) $(NAME)
 
 re:	fclean $(NAME)
+
+bonus:	$(OBJS) $(OBJS_B)
+	ar rcs $(NAME) $(OBJS) $(OBJS_B)
 
 .PHONY:	all clean fclean re bonus
