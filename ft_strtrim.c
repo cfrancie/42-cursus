@@ -6,11 +6,25 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 16:21:04 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/07 21:55:32 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/09 16:34:07 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+static int	ft_in(char const *s1, char c)
+{
+	size_t	i;
+
+	i = 0;
+	while (s1[i])
+	{
+		if (s1[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
@@ -19,20 +33,20 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_t	j;
 	size_t	k;
 
-	i = 0;
-	j = 0;
 	if (!s1 || !set)
 		return (NULL);
-	res = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1));
+	i = 0;
+	while (s1[i] && ft_in(set, s1[i]))
+		i++;
+	j = ft_strlen(s1);
+	while (j > i && ft_in(set, s1[j - 1]))
+		j--;
+	res = (char *)malloc(sizeof(char) * (j - i + 1));
 	if (!res)
 		return (NULL);
-	while (s1[i] && ft_strchr(set, s1[i]))
-		i++;
-	k = ft_strlen(s1) - 1;
-	while (k > i && ft_strchr(set, s1[k]))
-		k--;
-	while (i <= k)
-		res[j++] = s1[i++];
-	res[j] = '\0';
+	k = 0;
+	while (i < j)
+		res[k++] = s1[i++];
+	res[k] = '\0';
 	return (res);
 }

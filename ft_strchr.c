@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:55:00 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/08 14:12:26 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/09 15:27:58 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_strchr(const char *s, int c)
 	size_t	i;
 	char	tmp;
 
-	tmp = c % 128;
+	tmp = (char)c;
 	i = 0;
 	while (s[i])
 	{

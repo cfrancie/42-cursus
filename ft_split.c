@@ -6,34 +6,34 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 16:55:44 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/08 22:41:06 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/09 10:44:11 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_count_words(const char *str, char c)
+static int	ft_count_words(char const *s, char c)
 {
-	int i;
-	int word;
+	int	i;
+	int	word;
 
 	i = 0;
 	word = 0;
-	while (*str)
+	while (*s)
 	{
-		if (*str != c && word == 0)
+		if (*s != c && word == 0)
 		{
 			word = 1;
 			i++;
 		}
-		else if (*str == c)
+		else if (*s == c)
 			word = 0;
-		str++;
+		s++;
 	}
 	return (i);
 }
 
-static char	*ft_word_dup(const char *str, int start, int finish)
+static char	*ft_word_dup(char const *s, int start, int finish)
 {
 	char	*word;
 	int		i;
@@ -41,19 +41,20 @@ static char	*ft_word_dup(const char *str, int start, int finish)
 	i = 0;
 	word = malloc(sizeof(char) * (finish - start + 1));
 	while (start < finish)
-		word[i++] = str[start++];
+		word[i++] = s[start++];
 	word[i] = '\0';
 	return (word);
 }
 
-char		**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	size_t	i;
 	size_t	j;
 	int		k;
 	char	**split;
 
-	if (!s || !(split = malloc(sizeof(char *) * (ft_count_words(s, c) + 1))))
+	split = malloc(sizeof(char *) * (ft_count_words(s, c) + 1));
+	if (!s || !split)
 		return (0);
 	i = 0;
 	j = 0;
