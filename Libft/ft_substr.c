@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:38:38 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/09 18:03:45 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/11 11:29:16 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	i = start;
 	j = 0;
 	if (!s)
-		return (0);
+		return (NULL);
 	if (start > ft_strlen(s))
 		return (ft_strdup(""));
 	if (start + len > ft_strlen(s))

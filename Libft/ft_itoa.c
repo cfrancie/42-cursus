@@ -6,27 +6,29 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:55:28 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/08 19:23:53 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/11 13:22:15 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_intlen(long n)
+static int	ft_intlen(int n)
 {
+	long	nb;
 	int		len;
 
 	len = 0;
 	if (n == 0)
 		return (1);
-	if (n < 0)
+	nb = n;
+	if (nb < 0)
 	{
-		n = -n;
+		nb = -nb;
 		len++;
 	}
-	while (n > 0)
+	while (nb > 0)
 	{
-		n /= 10;
+		nb /= 10;
 		len++;
 	}
 	return (len);

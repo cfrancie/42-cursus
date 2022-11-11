@@ -6,7 +6,7 @@
 #    By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/08 19:04:31 by cfrancie          #+#    #+#              #
-#    Updated: 2022/11/10 16:09:45 by cfrancie         ###   ########.fr        #
+#    Updated: 2022/11/11 14:11:06 by cfrancie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,6 @@ BONUS_OBJS	= $(BONUS_SRCS:.c=.o)
 
 $(NAME):	$(OBJS)
 	ar rcs $(NAME) $(OBJS)
-
 
 all: $(NAME)
 
