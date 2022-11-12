@@ -6,47 +6,119 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:45:36 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/11 18:11:56 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/12 21:48:01 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_lenline(int fd)
-{
-	int		r;
-	char	a;
-	size_t	res;
 
-	res = 0;
-	r = read(fd, &a, 1);
-	while (r != -1)
+char	*ft_join_free(char *s1, char *s2)
+{
+	char	*str;
+
+	str = ft_strjoin(s1, s2);
+	free(s1);
+	return (str);
+}
+
+char	*ft_read_line(char *str)
+{
+	char		*res;
+	size_t		i;
+
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (str[i] && str[i] != '\n')
+		i++;
+	res = ft_calloc(i + 1, sizeof(char));
+	if (!res)
+		return (NULL);
+	i = 0;
+	while (str[i])
 	{
-		if (r == 0 || a == '\n')
+		if (str[i] == '\n')
 		{
-			if (a == '\n')
-				return (++res);
+			res[i] = '\n';
 			return (res);
 		}
-		r = read(fd, &a, 1);
-		++res;
+		res[i] = str[i];
+		i++;
 	}
-	return (0);
+	return (res);
+}
+
+char	*ft_map(int fd, char *buffer)
+{
+	char	*tmp;
+	int		r;
+
+	if (!buffer)
+		ft_calloc(1, 1);
+	tmp = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	if (!tmp)
+		return (NULL);
+	r = 1;
+	while (r > 0)
+	{
+		r = read(fd, tmp, BUFFER_SIZE);
+		if (r == -1)
+		{
+			free(buffer);
+			return (NULL);
+		}
+		tmp[r] = '\0';
+		buffer = ft_join_free(buffer, tmp);
+		if (ft_strchr(tmp, '\n'))
+			break ;
+	}
+	free(tmp);
+	return (buffer);
+}
+
+char	*ft_clear_line(char *str)
+{
+	char	*res;
+	size_t	i;
+	size_t	j;
+
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (str[i] && str[i] != '\n')
+		i++;
+	if (!str[i])
+	{
+		free(str);
+		return (NULL);
+	}
+	i++;
+	res = ft_calloc(ft_strlen(str) - i, sizeof(char));
+	if (!res)
+		return (NULL);
+	j = 0;
+	while (str[i])
+		res[j++] = str[i++];
+	free(str);
+	return (res);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*line;
-	size_t		s_line;
+	static char	*str;
+	char		*buffer;
 
-	if (fd < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
-	s_line = ft_lenline(fd);
-	if (s_line == 0)
+	str = ft_map(fd, str);
+	if (!str)
 		return (NULL);
-	line = (char *)malloc(sizeof(char) * (ft_lenline(fd) + 1));
-	if (!line)
+	buffer = ft_read_line(str);
+	if (!buffer)
 		return (NULL);
+	str = ft_clear_line(str);
+	return (buffer);
 }
 
 
