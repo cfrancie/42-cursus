@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:45:38 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/12 19:25:32 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/13 16:53:53 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,16 @@
 # include <fcntl.h>
 # include <stdint.h>
 
+# include <stdio.h>
+
+
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 2
 # endif
 
 // get_next_line
-char	*ft_join_free(char *s1, char *s2);
-char	*ft_read_line(char *str);
+char	*ft_clear_line(char *res, char *tmp);
 char	*ft_map(int fd, char *buffer);
-char	*ft_clear_line(char *str);
 char	*get_next_line(int fd);
 
 // get_next_line_utils

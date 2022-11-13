@@ -6,11 +6,12 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:45:32 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/12 19:25:14 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/13 17:17:18 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "stdio.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -35,6 +36,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!str)
 		return (NULL);
+	// printf("strjoin %s s1 %s s2", s1, s2);
 	while (s1[i])
 	{
 		str[i] = s1[i];
