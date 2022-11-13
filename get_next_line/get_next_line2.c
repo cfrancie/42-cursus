@@ -6,50 +6,90 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 12:12:32 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/13 17:04:23 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/14 00:14:21 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_map_file(int fd, char *str)
+int	ft_endline(char *str)
 {
-	char	*tmp;
 	size_t	i;
-	int		r;
 
-	tmp = (char *)ft_calloc(sizeof(char), BUFFER_SIZE + 1);
-	if (!tmp)
-		return (NULL);
-	r = read(fd, tmp, BUFFER_SIZE);
-	if (r == 0)
-		return (str);
 	i = 0;
-	while (tmp[i])
+	while (str[i])
 	{
-		if (tmp[i] == '\n')
-		{
-			tmp[i] = '\n';
-			str = ft_strjoin(str, tmp);
-			free(tmp);
-			return (str);
-		}
+		if (str[i] == '\n')
+			return (i);
 		i++;
 	}
-	str = ft_strjoin(str, tmp);
-	return (str);
+	return (-1);
+}
+
+char	*ft_clear_buffer(char *buffer)
+{
+	int	i;
+
+	i = 0;
+	while (buffer[i])
+	{
+		buffer[i] = '\0';
+		i++;
+	}
+	return (buffer);
+}
+
+char	*ft_clean_slash(char *str)
+{
+	// separates the array from '\n' and removes its characters from str
+	char		*tmp;
+	size_t		i;
+	size_t		j;
+
+	i = ft_endline(str);
+	j = 0;
+	tmp = (char *)malloc(sizeof(char) * (i + 1));
+	if (!tmp)
+		return (NULL);
+	while (j < i)
+	{
+		tmp[j] = str[j];
+		j++;
+	}
+	tmp[j] = '\0';
+	return (tmp);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	char		*line;
+	static char	*stash;
+	char		*buffer;
+	ssize_t		r;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	buffer = ft_map_file(fd, buffer);
+	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (NULL);
-	return (buffer);
+	r = read(fd, buffer, BUFFER_SIZE);
+	if (r == -1)
+		return (NULL);
+	while (r > 0)
+	{
+		buffer[r] = '\0';
+		if (!stash)
+			stash = ft_strdup(buffer);
+		else
+			stash = ft_strjoin(stash, buffer);
+		if (ft_endline(stash) > -1)
+			break ;
+		r = read(fd, buffer, BUFFER_SIZE);
+	}
+	free(buffer);
+	if (r == 0 && !stash)
+		return (NULL);
+	line = ft_strdup(stash);
+	stash = ft_clean_slash_n(stash);
+	return (line);
 }
 
 #include <stdio.h>

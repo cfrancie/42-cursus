@@ -6,69 +6,99 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:45:36 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/13 17:10:17 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/13 22:38:13 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_clear_line(char *res, char *tmp)
+size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 
 	i = 0;
-	while (tmp[i])
-	{
-		res[i] = tmp[i];
-		if (tmp[i] == '\n')
-			return (res);
-		++i;
-	}
-	return (res);
+	while (s[i])
+		i++;
+	return (i);
 }
 
-char	*ft_map(int fd, char *buffer)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*tmp;
-	int		r;
+	char	*str;
+	int		i;
+	int		j;
 
-	tmp = ft_calloc(sizeof(char), BUFFER_SIZE + 1);
-	if (!tmp)
+	i = 0;
+	j = 0;
+	if (!s1 || !s2)
 		return (NULL);
-	r = read(fd, tmp, BUFFER_SIZE + 1);
-	if (r == -1)
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!str)
+		return (NULL);
+	while (s1[i])
 	{
-		free(tmp);
-		free(buffer);
-		return (NULL);
+		str[i] = s1[i];
+		i++;
 	}
-	buffer = ft_strjoin(buffer, tmp);
-	free(tmp);
-	return (buffer);
+	while (s2[j])
+	{
+		str[i] = s2[j];
+		i++;
+		j++;
+	}
+	str[i] = '\0';
+	return (str);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == c)
+			return ((char *)s + i);
+		i++;
+	}
+	if (s[i] == c)
+		return ((char *)s + i);
+	return (NULL);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*res;
-	char		*tmp;
+	static char	*str;
+	char		*buf;
+	int			ret;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	tmp = ft_calloc(sizeof(char), BUFFER_SIZE + 1);
-	tmp = ft_map(fd, tmp);
-	if (!tmp)
+	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buf)
 		return (NULL);
-	res = ft_clear_line(res, tmp);
-	return (res);
+	ret = read(fd, buf, BUFFER_SIZE);
+	while (ret > 0)
+	{
+		buf[ret] = '\0';
+		str = ft_strjoin(str, buf);
+		if (!str)
+			return (NULL);
+		if (ft_strchr(str, '\n'))
+			break ;
+		ret = read(fd, buf, BUFFER_SIZE);
+	}
+	free(buf);
+	return (str);
 }
 
 // cc -Wall -Wextra -Werror -D BUFFER_SIZE=n
 
+#include <sys/types.h>
 #include <stdio.h>
 int main(void)
 {
 	int	fd = open("./test", O_RDONLY);
 	char	*tmp = get_next_line(fd);
-	printf("%d %s",fd, tmp);
 	return (0);
 }

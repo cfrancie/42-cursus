@@ -5,22 +5,32 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 11:45:32 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/13 17:17:18 by cfrancie         ###   ########.fr       */
+/*   Created: 2022/11/13 23:29:30 by cfrancie          #+#    #+#             */
+/*   Updated: 2022/11/14 00:05:28 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include "stdio.h"
 
-size_t	ft_strlen(const char *s)
+char	*ft_strdup(const char *s1)
 {
-	size_t	i;
+	char	*str;
+	int		i;
 
 	i = 0;
-	while (s[i])
+	while (s1[i])
 		i++;
-	return (i);
+	str = (char *)malloc(sizeof(char) * (i + 1));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
@@ -36,7 +46,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!str)
 		return (NULL);
-	// printf("strjoin %s s1 %s s2", s1, s2);
 	while (s1[i])
 	{
 		str[i] = s1[i];
@@ -50,46 +59,4 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	str[i] = '\0';
 	return (str);
-}
-
-void	ft_bzero(void *s, size_t n)
-{
-	char	*str;
-	size_t	i;
-
-	str = (char *)s;
-	i = 0;
-	while (i < n)
-		str[i++] = '\0';
-}
-
-void	*ft_calloc(size_t nmemb, size_t size)
-{
-	void	*res;
-
-	if (nmemb == SIZE_MAX || size == SIZE_MAX)
-		return (NULL);
-	res = malloc(nmemb * size);
-	if (!res)
-		return (NULL);
-	ft_bzero(res, nmemb * size);
-	return (res);
-}
-
-char	*ft_strchr(const char *s, int c)
-{
-	size_t	i;
-	char	tmp;
-
-	tmp = (char)c;
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == tmp)
-			return ((char *)s + i);
-		i++;
-	}
-	if (s[i] == tmp)
-		return ((char *)s + i);
-	return (NULL);
 }
