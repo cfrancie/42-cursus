@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 13:45:16 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/15 00:12:22 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/16 15:57:10 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,17 @@ int	ft_printf(const char *str, ...)
 		if (str[i] == '%')
 		{
 			i++;
-			if (str[i] == 'd')
-				ft_putnbr(va_arg(ap, int));
+			if (str[i] == 'c')
+				ft_putnbr(va_arg(ap, char));
 			else if (str[i] == 's')
 				ft_putstr(va_arg(ap, char *));
-			else if (str[i] == 'c')
-				ft_putchar(va_arg(ap, int));
+			else if (str[i] == 'p')
+				ft_putvoid(va_arg(ap, void *));
+			else if (str[i] == 'd' || str[i] == 'i')
+				ft_putint(va_arg(ap, int));
+			else if (str[i] == 'x')
+			
+			
 		}
 		else
 			ft_putchar(str[i]);
