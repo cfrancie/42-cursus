@@ -6,84 +6,88 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 20:04:59 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/14 22:22:53 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/16 13:58:09 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+size_t	ft_strchr(const char *str, char c)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i] && str[i] != c)
+		i++;
+	if (str[i] == c)
+		return (1);
+	return (0);
+}
+
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int		sizetotal;
-	char	*res;
+	char	*str;
 	int		i;
 	int		j;
 
 	i = 0;
-	sizetotal = ft_strlen(s1) + ft_strlen(s2);
-	res = malloc(sizeof(char) * (sizetotal + 1));
-	if (!res || !s1 || !s2)
+	j = 0;
+	if (!s1 || !s2)
 		return (NULL);
-	while (s1[i] != 0)
+	str = (char *)malloc(sizeof(char)
+			* (ft_strlen(s1, '\0') + ft_strlen(s2, '\0') + 1));
+	if (!str)
+		return (NULL);
+	while (s1[i])
 	{
-		res[i] = s1[i];
+		str[i] = s1[i];
 		i++;
 	}
-	j = 0;
-	while (s2[j] != 0)
+	while (s2[j])
 	{
-		res[i] = s2[j];
+		str[i] = s2[j];
 		i++;
 		j++;
 	}
-	res[sizetotal] = 0;
-	return (res);
-}
-
-char	*ft_strchr(const char *string, int searchedChar)
-{
-	char	*str;
-
-	str = (char *)string;
-	while (*str != searchedChar && *str != 0)
-		str++;
-	if (*str == searchedChar)
-		return (str);
-	else
-		return (NULL);
+	str[i] = '\0';
+	return (str);
 }
 
 void	ft_bzero(void *s, size_t n)
 {
-	char	*str;
 	size_t	i;
 
-	str = (char *)s;
 	i = 0;
 	while (i < n)
 	{
-		str[i] = '\0';
+		((unsigned char *)s)[i] = 0;
 		i++;
 	}
 }
 
-void	*ft_calloc(size_t elementCount, size_t elementSize)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	char	*res;
+	void	*res;
 
-	res = malloc(elementSize * elementCount);
+	if (nmemb == SIZE_MAX || size == SIZE_MAX)
+		return (NULL);
+	res = malloc(nmemb * size);
 	if (!res)
 		return (NULL);
-	ft_bzero(res, elementSize * elementCount);
+	ft_bzero(res, nmemb * size);
 	return (res);
 }
 
-size_t	ft_strlen(const char *theString)
+size_t	ft_strlen(const char *str, char c)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	while (theString[i])
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (i);
 		i++;
+	}
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 19:55:30 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/14 22:23:11 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/16 13:50:15 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,25 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-
-char	*ft_free(char *buffer, char *buf);
-char	*ft_next(char *buffer);
-char	*ft_line(char *buffer);
-char	*read_file(int fd, char *res);
-char	*get_next_line(int fd);
-
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strchr(const char *string, int searchedChar);
-void	ft_bzero(void *s, size_t n);
-void	*ft_calloc(size_t elementCount, size_t elementSize);
-size_t	ft_strlen(const char *theString);
-
+# include <stdint.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 3
 # endif
+
+// get_next_line.c
+char	*ft_free_and_add(char *s_buffer, char *buffer);
+char	*ft_read_file(int fd, char *s_buffer);
+char	*ft_add_clean(char *buffer);
+char	*ft_re_buffer(char *buffer);
+char	*get_next_line(int fd);
+
+// get_next_line_utils.c
+
+size_t	ft_strchr(const char *str, char c);
+char	*ft_strjoin(char const *s1, char const *s2);
+void	ft_bzero(void *s, size_t n);
+void	*ft_calloc(size_t nmemb, size_t size);
+size_t	ft_strlen(const char *str, char c);
 
 #endif
