@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 19:55:30 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/16 13:50:15 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/16 14:05:32 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ char	*ft_re_buffer(char *buffer);
 char	*get_next_line(int fd);
 
 // get_next_line_utils.c
-
 size_t	ft_strchr(const char *str, char c);
 char	*ft_strjoin(char const *s1, char const *s2);
 void	ft_bzero(void *s, size_t n);

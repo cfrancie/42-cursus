@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 20:04:59 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/16 13:58:09 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/16 14:06:19 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@ size_t	ft_strchr(const char *str, char c)
 	size_t	i;
 
 	i = 0;
-	while (str[i] && str[i] != c)
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (1);
 		i++;
-	if (str[i] == c)
-		return (1);
+	}
 	return (0);
 }
 
