@@ -13,9 +13,12 @@
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror -I.
 NAME		= libft.a
-SRCS		= main.c
+SRCS		= ft_printf.c ft_put.c
 
 OBJS		= $(SRCS:.c=.o)
+
+.c.o:
+	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
 $(NAME):	$(OBJS)
 	ar rcs $(NAME) $(OBJS)
@@ -30,4 +33,4 @@ fclean: clean
 
 re: fclean $(NAME)
 
-.PHONY: all bonus clean fclean re
+.PHONY: .c.o all bonus clean fclean re

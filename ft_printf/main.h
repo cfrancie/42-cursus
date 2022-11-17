@@ -22,13 +22,15 @@
 // size_t
 # include <stdint.h>
 
+// main.c
+static void	ft_putall(const char *str, int i);
+int	ft_printf(const char *str, ...);
+
 // print.c
 void	ft_putchar(const char c);
 void	ft_putstr(const char *str);
 void	ft_putint(int n);
-void	ft_putvoid(void *ptr);
-
-// util.c
-int		ft_toupper(int c);
+void	ft_putvoid(void *ptr, int b_maj);
+void	ft_puthexa(int n, int maj);
 
 #endif
