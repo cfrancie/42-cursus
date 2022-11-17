@@ -109,6 +109,10 @@ char	*get_next_line(int fd)
 	if (!buffer)
 		return (NULL);
 	line = ft_add_clean(buffer);
+	if (!line)
+		return (NULL);
 	buffer = ft_re_buffer(buffer);
+	if (!buffer)
+		return (line);
 	return (line);
 }
