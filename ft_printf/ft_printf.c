@@ -1,62 +1,71 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 13:45:16 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/16 15:57:10 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/18 18:40:12 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "ft_printf.h"
 
-static int8_t	ft_putall(const char *str, int i)
+static ssize_t	ft_putall(const char *str, int i, va_list ap)
 {
-	static va_list	g_ap;
-
-	if (!str)
-		return (0);
+	if (!str || !str[i + 1])
+		return (-1);
 	if (str[i + 1] == '%')
-		ft_putchar('%');
+		return (ft_putchar('%'));
 	else if (str[i + 1] == 'c')
-		ft_putchar(va_arg(g_ap, int));
+		return (ft_putchar(va_arg(ap, int)));
 	else if (str[i + 1] == 's')
-		ft_putstr(va_arg(g_ap, char *));
-	else if (str[i + 1] == 'd')
-		ft_putint(va_arg(g_ap, int));
+		return (ft_putstr(va_arg(ap, char *)));
+	if (str[i + 1] == 'd' || str[i + 1] == 'i')
+		return (ft_putint(va_arg(ap, int)));
 	else if (str[i + 1] == 'p')
-	{
-		ft_putstr("0x");
-		ft_putvoid(va_arg(g_ap, void *), 0);
-	}
+		return (ft_putvoid(va_arg(ap, void *), 0));
 	else if (str[i + 1] == 'x')
-		ft_puthexa(va_arg(g_ap, int), 0);
+		return (ft_puthexa(va_arg(ap, int), 0));
 	else if (str[i + 1] == 'X')
-		ft_puthexa(va_arg(g_ap, int), 1);
-	else if (str[i] == '%')
-	return (1);
+		return (ft_puthexa(va_arg(ap, int), 1));
+	return (-1);
 }
 
 int	ft_printf(const char *str, ...)
 {
 	va_list	ap;
-	size_t	i;
+	int		res;
+	ssize_t	tmp;
+	int		i;
 
 	va_start(ap, str);
 	i = 0;
+	res = 0;
 	while (str[i])
 	{
-		if (str[i] == '%')
+		if (str[i] == '%' && ft_strindex(str[i + 1]))
 		{
-			if (ft_putall(str, i) == 0)
+			tmp = ft_putall(str, i, ap);
+			if (tmp == -1)
 				return (-1);
 			i++;
+			res += tmp;
 		}
 		else
-			ft_putchar(str[i]);
+			res += ft_putchar(str[i]);
 		i++;
 	}
-	return (i);
+	return (res);
+}
+
+#include <stdio.h>
+int main(void)
+{
+	int	i = ft_printf("%i\n", 42000);
+	printf("%i\n", i);
+	i = printf("%i\n", 42000);
+	printf("%i\n", i);
+	return 0;
 }
