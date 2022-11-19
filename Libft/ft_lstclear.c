@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 12:17:47 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/09 13:03:58 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/19 01:16:27 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,15 @@
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
 	t_list	*tmp;
-	t_list	*tmp2;
 
-	if (!lst || !*lst)
+	if (!lst || !del)
 		return ;
-	tmp = *lst;
-	while (tmp)
+	while (*lst)
 	{
-		tmp2 = tmp->next;
-		ft_lstdelone(tmp, del);
-		tmp = tmp2;
+		tmp = *lst;
+		*lst = (*lst)->next;
+		del(tmp->content);
+		free(tmp);
 	}
 	*lst = NULL;
 }

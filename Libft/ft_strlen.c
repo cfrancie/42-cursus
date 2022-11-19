@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:12:30 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/11 16:58:22 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/19 01:25:57 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
-	while (s[i])
+	while (*s++)
 		i++;
 	return (i);
 }

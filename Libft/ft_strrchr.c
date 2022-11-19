@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 22:44:44 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/09 23:13:57 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/19 01:36:18 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,16 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	size_t	i;
+	char	*last;
 
-	i = ft_strlen(s);
-	while (i > 0 && s[i] != (char)c)
-		i--;
-	if (s[i] == (char)c)
-		return ((char *)&s[i]);
-	return (NULL);
+	last = NULL;
+	while (*s)
+	{
+		if (*s == (char)c)
+			last = (char *)s;
+		s++;
+	}
+	if (*s == (char)c)
+		last = (char *)s;
+	return (last);
 }

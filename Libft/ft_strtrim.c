@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 16:21:04 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/09 16:34:07 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/19 01:35:27 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,27 @@ static int	ft_in(char const *s1, char c)
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*res;
 	size_t	i;
 	size_t	j;
 	size_t	k;
+	char	*str;
 
+	i = 0;
+	j = 0;
+	k = 0;
 	if (!s1 || !set)
 		return (NULL);
-	i = 0;
-	while (s1[i] && ft_in(set, s1[i]))
+	while (ft_in(set, s1[i]))
 		i++;
-	j = ft_strlen(s1);
-	while (j > i && ft_in(set, s1[j - 1]))
+	while (s1[i + j])
+		j++;
+	while (ft_in(set, s1[i + j - 1]))
 		j--;
-	res = (char *)malloc(sizeof(char) * (j - i + 1));
-	if (!res)
+	str = (char *)malloc(sizeof(char) * (j + 1));
+	if (!str)
 		return (NULL);
-	k = 0;
-	while (i < j)
-		res[k++] = s1[i++];
-	res[k] = '\0';
-	return (res);
+	while (k < j)
+		str[k++] = s1[i++];
+	str[k] = '\0';
+	return (str);
 }

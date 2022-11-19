@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:19:49 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/11 13:35:04 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/19 01:29:43 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	if (!s)
-		return ;
-	ft_memset(s, 0, n);
+	unsigned char	*ptr;
+
+	ptr = (unsigned char *)s;
+	while (n--)
+		*ptr++ = 0;
 }

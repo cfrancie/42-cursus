@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 12:02:37 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/09 13:52:07 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/19 01:17:39 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int	ft_lstsize(t_list *lst)
 {
-	int	size;
+	int	i;
 
-	size = 0;
+	i = 0;
 	while (lst)
 	{
 		lst = lst->next;
-		size++;
+		i++;
 	}
-	return (size);
+	return (i);
 }

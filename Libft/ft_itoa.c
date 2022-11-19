@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:55:28 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/11 13:22:15 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/19 01:30:34 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,14 @@
 
 static int	ft_intlen(int n)
 {
-	long	nb;
-	int		len;
+	int	len;
 
 	len = 0;
-	if (n == 0)
-		return (1);
-	nb = n;
-	if (nb < 0)
-	{
-		nb = -nb;
+	if (n <= 0)
 		len++;
-	}
-	while (nb > 0)
+	while (n)
 	{
-		nb /= 10;
+		n /= 10;
 		len++;
 	}
 	return (len);
@@ -36,24 +29,23 @@ static int	ft_intlen(int n)
 
 char	*ft_itoa(int n)
 {
-	char	*str;
-	int		size;
-	int		sign;
+	char	*res;
+	int		len;
 
-	sign = 1;
-	if (n < 0)
-		sign = -1;
-	size = ft_intlen(n);
-	str = (char *)malloc(sizeof(char) * (size + 1));
-	if (!str)
+	len = ft_intlen(n);
+	res = (char *)malloc((size_t)(sizeof(char) * (len + 1)));
+	if (!res)
 		return (NULL);
-	str[size] = '\0';
-	while (size--)
+	res[len] = '\0';
+	if (n < 0)
 	{
-		str[size] = (n % 10) * sign + '0';
+		res[0] = '-';
+		n *= -1;
+	}
+	while (len--)
+	{
+		res[len] = n % 10 + '0';
 		n /= 10;
 	}
-	if (sign == -1)
-		str[0] = '-';
-	return (str);
+	return (res);
 }
