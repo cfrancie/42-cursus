@@ -6,20 +6,20 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 13:45:16 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/19 02:22:54 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/20 00:57:14 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static ssize_t	ft_putchar(const char c)
+static int	ft_putchar(const char c)
 {
 	return (write(1, &c, 1));
 }
 
-static ssize_t	ft_putstr(const char *str)
+static int	ft_putstr(const char *str)
 {
-	ssize_t	i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -27,10 +27,10 @@ static ssize_t	ft_putstr(const char *str)
 	return (i);
 }
 
-static ssize_t	ft_puthexa(unsigned long n, bool is_upper)
+static int	ft_puthexa(unsigned long n, bool is_upper)
 {
 	char	*base;
-	ssize_t	i;
+	int	i;
 
 	i = 0;
 	base = "0123456789abcdef";
@@ -42,9 +42,9 @@ static ssize_t	ft_puthexa(unsigned long n, bool is_upper)
 	return (i);
 }
 
-static ssize_t	ft_putall(const char *str, va_list ap, int i)
+static int	ft_putall(const char *str, va_list ap, int i)
 {
-	ssize_t		len;
+	int		len;
 
 	len = 0;
 	if (str[i] == 'c')
@@ -72,7 +72,7 @@ static ssize_t	ft_putall(const char *str, va_list ap, int i)
 int	ft_printf(const char *str, ...)
 {
 	va_list	ap;
-	ssize_t	res;
+	int		res;
 	int		i;
 
 	va_start(ap, str);
