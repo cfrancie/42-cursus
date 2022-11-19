@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 14:15:41 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/18 18:09:02 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/19 00:22:33 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,7 @@
 # include <stdint.h>
 # include <stdbool.h>
 
-// tmp
-# include <stdio.h>
-
-// ft_printf.c
+char	*ft_itoa(int n);
 int		ft_printf(const char *str, ...);
-
-// print.c
-ssize_t	ft_putchar(const char c);
-ssize_t	ft_putstr(const char *str);
-ssize_t	ft_putint(int n);
-ssize_t	ft_putvoid(void *ptr, int b_maj);
-ssize_t	ft_puthexa(int n, int b_maj);
-
-// utilitis
-char	*ft_strchr(const char *s, int c);
-int		ft_strindex(const char c);
 
 #endif
