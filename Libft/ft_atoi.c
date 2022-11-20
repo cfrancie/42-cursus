@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:59:51 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/19 01:29:36 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/20 16:15:06 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int ft_atoi(const char *nptr)
 {
-	int	res;
-	int	sign;
+	int		res;
+	char	sign;
 
 	res = 0;
 	sign = 1;
