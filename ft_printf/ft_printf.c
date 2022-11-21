@@ -6,31 +6,49 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 13:45:16 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/20 00:57:14 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/21 18:46:32 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_putchar(const char c)
+int	ft_putchar(char c)
 {
 	return (write(1, &c, 1));
 }
 
-static int	ft_putstr(const char *str)
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+int	ft_putstr(char *str)
 {
 	int	i;
 
 	i = 0;
+	if (str == NULL)
+  {
+		write(1, "(null)", 7);
+		return (6);
+	}
 	while (str[i])
-		i += ft_putchar(str[i]);
+	{
+		write(1, &str[i], 1);
+		i++;
+	}
 	return (i);
 }
 
-static int	ft_puthexa(unsigned long n, bool is_upper)
+int	ft_puthexa(long n, int is_upper)
 {
 	char	*base;
-	int	i;
+	int		i;
 
 	i = 0;
 	base = "0123456789abcdef";
@@ -42,29 +60,46 @@ static int	ft_puthexa(unsigned long n, bool is_upper)
 	return (i);
 }
 
-static int	ft_putall(const char *str, va_list ap, int i)
+int	ft_puthexa_main(unsigned long n, int is_upper)
+{
+	if (!n)
+		return (write(1, "(nil)", 5));
+	ft_putstr("0x");
+	return (ft_puthexa(n, is_upper) + 2);
+}
+
+int	ft_putnbr_main(long long n)
+{
+	char	*conv;
+	int		size;
+
+	conv = ft_itoa(n);
+	size = ft_strlen(conv);
+	ft_putstr(conv);
+	free(conv);
+	return (size);
+}
+
+int	ft_putall(const char *str, va_list ap, int i)
 {
 	int		len;
 
 	len = 0;
-	if (str[i] == 'c')
+	if (str[i + 1] == 'c')
 		len += ft_putchar(va_arg(ap, int));
-	else if (str[i] == 's')
+	else if (str[i + 1] == 's')
 		len += ft_putstr(va_arg(ap, char *));
-	else if (str[i] == 'p')
-	{
-		len += ft_putstr("0x");
-		len += ft_puthexa((unsigned long)va_arg(ap, void *), 0);
-	}
-	else if (str[i] == 'd' || str[i] == 'i')
-		len += ft_putstr(ft_itoa(va_arg(ap, int)));
-	else if (str[i] == 'u')
-		len += ft_putstr(ft_itoa(va_arg(ap, unsigned int)));
-	else if (str[i] == 'x')
+	else if (str[i + 1] == 'p')
+		len += ft_puthexa_main(va_arg(ap, unsigned long), 0);
+	else if (str[i + 1] == 'd' || str[i + 1] == 'i')
+		len += ft_putnbr_main(va_arg(ap, int));
+	else if (str[i + 1] == 'u')
+		len += ft_putnbr_main((long long)va_arg(ap, unsigned long));
+	else if (str[i + 1] == 'x')
 		len += ft_puthexa(va_arg(ap, unsigned int), 0);
-	else if (str[i] == 'X')
-		len += ft_puthexa(va_arg(ap, unsigned int), 1);
-	else if (str[i] == '%')
+	else if (str[i + 1] == 'X')
+		len += ft_puthexa_main(va_arg(ap, unsigned int), 1);
+	else if (str[i + 1] == '%')
 		len += ft_putchar('%');
 	return (len);
 }
@@ -75,16 +110,21 @@ int	ft_printf(const char *str, ...)
 	int		res;
 	int		i;
 
+	if (!str)
+		return (0);
 	va_start(ap, str);
 	i = 0;
 	res = 0;
 	while (str[i])
 	{
 		if (str[i] == '%')
-			res += ft_putall(str, ap, ++i);
+        {
+			res += ft_putall(str, ap, i);
+            i++;
+        }
 		else
 			res += ft_putchar(str[i]);
-		++i;
+		i++;
 	}
 	va_end(ap);
 	return (res);
