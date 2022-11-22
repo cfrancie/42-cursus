@@ -6,59 +6,11 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 13:45:16 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/21 18:46:32 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/22 00:49:03 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-int	ft_putchar(char c)
-{
-	return (write(1, &c, 1));
-}
-
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-int	ft_putstr(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (str == NULL)
-  {
-		write(1, "(null)", 7);
-		return (6);
-	}
-	while (str[i])
-	{
-		write(1, &str[i], 1);
-		i++;
-	}
-	return (i);
-}
-
-int	ft_puthexa(long n, int is_upper)
-{
-	char	*base;
-	int		i;
-
-	i = 0;
-	base = "0123456789abcdef";
-	if (is_upper)
-		base = "0123456789ABCDEF";
-	if (n >= 16)
-		i += ft_puthexa(n / 16, is_upper);
-	i += ft_putchar(base[n % 16]);
-	return (i);
-}
 
 int	ft_puthexa_main(unsigned long n, int is_upper)
 {
@@ -68,12 +20,15 @@ int	ft_puthexa_main(unsigned long n, int is_upper)
 	return (ft_puthexa(n, is_upper) + 2);
 }
 
-int	ft_putnbr_main(long long n)
+int	ft_putnbr_main(long n, int is_unsigned)
 {
 	char	*conv;
 	int		size;
 
-	conv = ft_itoa(n);
+	if (is_unsigned)
+		conv = ft_itoa((unsigned int)n);
+	else
+		conv = ft_itoa(n);
 	size = ft_strlen(conv);
 	ft_putstr(conv);
 	free(conv);
@@ -92,13 +47,13 @@ int	ft_putall(const char *str, va_list ap, int i)
 	else if (str[i + 1] == 'p')
 		len += ft_puthexa_main(va_arg(ap, unsigned long), 0);
 	else if (str[i + 1] == 'd' || str[i + 1] == 'i')
-		len += ft_putnbr_main(va_arg(ap, int));
+		len += ft_putnbr_main(va_arg(ap, int), 0);
 	else if (str[i + 1] == 'u')
-		len += ft_putnbr_main((long long)va_arg(ap, unsigned long));
+		len += ft_putnbr_main(va_arg(ap, unsigned int), 1);
 	else if (str[i + 1] == 'x')
 		len += ft_puthexa(va_arg(ap, unsigned int), 0);
 	else if (str[i + 1] == 'X')
-		len += ft_puthexa_main(va_arg(ap, unsigned int), 1);
+		len += ft_puthexa(va_arg(ap, unsigned int), 1);
 	else if (str[i + 1] == '%')
 		len += ft_putchar('%');
 	return (len);

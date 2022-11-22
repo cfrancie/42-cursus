@@ -1,50 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_libft.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/19 00:21:32 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/19 00:22:26 by cfrancie         ###   ########.fr       */
+/*   Created: 2022/11/22 00:16:34 by cfrancie          #+#    #+#             */
+/*   Updated: 2022/11/22 00:58:26 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_intlen(int n)
+int	ft_strlen(const char *str)
 {
-	long	nb;
-	int		len;
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+static int	ft_intlen(long n)
+{
+	int	len;
 
 	len = 0;
-	if (n == 0)
-		return (1);
-	nb = n;
-	if (nb < 0)
-	{
-		nb = -nb;
+	if (n <= 0)
 		len++;
-	}
-	while (nb > 0)
+	while (n)
 	{
-		nb /= 10;
+		n /= 10;
 		len++;
 	}
 	return (len);
 }
 
-char	*ft_itoa(int n)
+char	*ft_itoa(long n)
 {
 	char	*str;
+	char	sign;
 	int		size;
-	int		sign;
 
 	sign = 1;
 	if (n < 0)
 		sign = -1;
 	size = ft_intlen(n);
-	str = (char *)malloc(sizeof(char) * (size + 1));
+	str = malloc(sizeof(char) * (size + 1));
 	if (!str)
 		return (NULL);
 	str[size] = '\0';
