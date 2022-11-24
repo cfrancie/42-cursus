@@ -6,23 +6,23 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 17:55:28 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/19 01:30:34 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/23 19:40:33 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_intlen(int n)
+static int	ft_nbrlen(int n)
 {
 	int	len;
 
 	len = 0;
 	if (n <= 0)
-		len++;
+		++len;
 	while (n)
 	{
 		n /= 10;
-		len++;
+		++len;
 	}
 	return (len);
 }
@@ -32,7 +32,7 @@ char	*ft_itoa(int n)
 	char	*res;
 	int		len;
 
-	len = ft_intlen(n);
+	len = ft_nbrlen(n);
 	res = (char *)malloc((size_t)(sizeof(char) * (len + 1)));
 	if (!res)
 		return (NULL);
@@ -40,7 +40,7 @@ char	*ft_itoa(int n)
 	if (n < 0)
 	{
 		res[0] = '-';
-		n *= -1;
+		n = -n;
 	}
 	while (len--)
 	{
