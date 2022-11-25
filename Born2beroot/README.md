@@ -62,7 +62,7 @@ Defaults      badpass_message="Incorrect password"
 Defaults      log_input,log_output
 Defaults      iolog_dir="/var/log/sudo"
 Defaults      requiretty
-Defaults      secure_path="that/long/paths/from/subject"
+Defaults      secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
 ```
 
 ### Installation et configuration de SSH
@@ -89,7 +89,7 @@ $ sudo ufw status
 ```
 ### Mise en place d'une politique de mots de passe forts
 ```sh
-$ sudo nano /etc/login.defs
+$ sudo vim /etc/login.defs
 ```
 - Modifie ça dans le fichier login.defs
 ```sh
@@ -98,7 +98,7 @@ PASS_MIN_DAYS    0     -> PASS_MIN_DAYS    2
 ```
 ```sh
 $ sudo apt install libpam-pwquality
-$ sudo nano /etc/pam.d/common-password
+$ sudo vim /etc/pam.d/common-password
 ```
 - Ajoute `minlen=10 ucredit=-1 dcredit=-1 maxrepeat=3 reject_username difok=7 enforce_for_root` à la fin du `password requisite pam_pwqiality.so retry=3` dans `common-password`
 
@@ -112,7 +112,7 @@ $ sudo passwd
 - Maintenant tu dois pouvoir te connecter en ssh via un pc en local
 
 ```sh
-$ sudo shutdown
+$ sudo poweroff
 ```
 - Configuration de la VM
 - Réseaux -> Adapter 1 -> Advanced -> Redirection de ports
