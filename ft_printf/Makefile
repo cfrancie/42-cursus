@@ -6,7 +6,7 @@
 #    By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 14:18:42 by cfrancie          #+#    #+#              #
-#    Updated: 2022/11/22 00:20:16 by cfrancie         ###   ########.fr        #
+#    Updated: 2022/11/25 15:39:43 by cfrancie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,13 +18,14 @@ SRCS		= ft_printf.c ft_libft.c ft_putall.c
 
 OBJS		= $(SRCS:.c=.o)
 
+all: $(NAME)
+
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
 $(NAME):	$(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
-all: $(NAME)
 
 clean:
 	rm -f $(OBJS)
@@ -34,4 +35,4 @@ fclean: clean
 
 re: fclean $(NAME)
 
-.PHONY: .c.o $(NAME) all clean fclean re
+.PHONY: all clean fclean re

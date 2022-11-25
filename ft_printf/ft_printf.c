@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 13:45:16 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/22 00:49:03 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/22 14:34:51 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ int	ft_printf(const char *str, ...)
 	while (str[i])
 	{
 		if (str[i] == '%')
-        {
+		{
 			res += ft_putall(str, ap, i);
-            i++;
-        }
+			i++;
+		}
 		else
 			res += ft_putchar(str[i]);
 		i++;

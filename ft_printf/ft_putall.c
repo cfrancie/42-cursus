@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 00:15:40 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/22 00:55:50 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/22 14:35:52 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int	ft_puthexa(unsigned long n, int is_upper)
 {
 	char	*base;
 	int		i;
-
 
 	i = 0;
 	base = "0123456789abcdef";
