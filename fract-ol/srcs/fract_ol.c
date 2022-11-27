@@ -6,27 +6,38 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 03:16:36 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/27 03:17:30 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/27 19:44:53 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fract_ol.h"
 
-int main(int argc, char  **arg)
+int	mouse_hook(int keycode, t_vars *vars)
 {
-    t_fractol	*fractol;
+	mlx_clear_window(vars->mlx, vars->win);
+	return (0);
+}
 
-    if (argc != 2)
-    {
-        printf("Usage: ./fractol [fractal name]\n");
-        return (0);
-    }
-    if (!(fractol = (t_fractol *)malloc(sizeof(t_fractol))))
-        return (0);
-    if (!(fractol->mlx = mlx_init()))
-        return (0);
-    if (!(fractol->win = mlx_new_window(fractol->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "fractol")))
-        return (0);
-    mlx_loop(fractol->mlx);  
-    return 0;
+t_vars	init_window(char *title, t_vars vars)
+{
+	vars.mlx = mlx_init();
+	vars.win = mlx_new_window(vars.mlx,
+			WINDOW_WIDTH, WINDOW_HEIGHT, "Hello world!");
+	mlx_mouse_hook(vars.win, mouse_hook, &vars);
+	mandelbrot(vars);
+	return (vars);
+}
+
+int	main(int argc, char **argv)
+{
+	t_vars	vars;
+
+	if (argc != 2)
+	{
+		printf("Usage: ./fractol [fractal name]\n");
+		return (0);
+	}
+	vars = init_window(argv[1], vars);
+	mlx_loop(vars.mlx);
+	return (0);
 }

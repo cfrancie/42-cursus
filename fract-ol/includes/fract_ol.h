@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 15:41:13 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/27 03:29:06 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/27 19:36:40 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,22 @@
 # define WINDOW_WIDTH 600
 # define WINDOW_HEIGHT 300
 
-typedef struct s_fractol
+typedef struct s_vars
 {
 	void	*mlx;
 	void	*win;
-}	t_fractol;
+	int		x;
+	int		y;
+}	t_vars;
+
+typedef struct s_complex
+{
+	double	re;
+	double	im;
+}	t_complex;
+
+void	set_color(t_vars vars, int div);
+int		is_diverge(t_complex num, double (*f)(t_complex), int max_iteration);
+void	mandelbrot(t_vars vast);
 
 #endif

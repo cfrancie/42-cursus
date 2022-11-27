@@ -6,7 +6,7 @@
 #    By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/27 02:24:15 by cfrancie          #+#    #+#              #
-#    Updated: 2022/11/27 02:41:37 by cfrancie         ###   ########.fr        #
+#    Updated: 2022/11/27 19:33:29 by cfrancie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ LIBFT_F = $(addprefix $(LIBFT_P), $(LIBFT))
 
 INC     = -I ./includes/ -I ./libft/ -I ./minilibx-linux/
 
-SRCS	= fract_ol.c color.c
+SRCS	= fract_ol.c color.c calculator.c
 SRCS_P	= srcs/
 
 OBJS	= $(SRCS:.c=.o)
