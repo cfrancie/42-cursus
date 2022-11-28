@@ -6,36 +6,32 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 17:04:45 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/27 19:45:37 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/28 02:22:50 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fract_ol.h"
 
-static double	mandelbrot_equa(t_complex tmp)
-{
-	return (tmp.re * 2 + tmp.im);
-}
-
 /*
-* Renvoie -1 si la suite ne diverge pas et le nombre
-* d'iteration de la suite si elle l'es
+* calculates whether the function x^2 + y diverges or converges
 */
-int	is_diverge(t_complex num, double (*f)(t_complex), int max_iteration)
+int	is_diverge(t_complex num)
 {
-	t_complex	tmp;
 	int			i;
+	t_complex	tmp;
 
 	i = 0;
-	tmp.re = f(num);
-	while (i < max_iteration)
+	tmp.re = 0;
+	tmp.im = 0;
+	while (i < MAX_ITER)
 	{
-		tmp.re = f(tmp);
+		tmp.re = tmp.re * tmp.re - tmp.im * tmp.im + num.re;
+		tmp.im = (tmp.re * 2 + tmp.im) + num.im;
+		if (tmp.re * tmp.re + tmp.im * tmp.im > 4)
+			return (i);
 		i++;
 	}
-	if (tmp.re >= 100 || tmp.re <= 100)
-		return (i);
-	return (-1);
+	return (i);
 }
 
 /*
@@ -55,12 +51,11 @@ void	mandelbrot(t_vars vast)
 		{
 			num.re = vast.x;
 			num.im = vast.y;
-			tmp = is_diverge(num, mandelbrot_equa, 100);
-			if (tmp == -1)
-				set_color(vast, 0);
+			tmp = is_diverge(num);
+			if (tmp == MAX_ITER)
+				mlx_pixel_put(vast.mlx, vast.win, vast.x, vast.y, 0x000000);
 			else
-				set_color(vast, 1);
-			vast.y++;
+				mlx_pixel_put(vast.mlx, vast.win, vast.x, vast.y, tmp * 0x0000FF);
 		}
 		vast.x++;
 	}

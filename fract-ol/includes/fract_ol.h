@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 15:41:13 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/27 19:36:40 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/28 02:29:55 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,28 +24,34 @@
 // strerror
 # include <string.h>
 
-# include "../srcs/minilibx-linux/mlx.h"
-# include "../srcs/libft/libft.h"
+# include "../minilibx-linux/mlx.h"
+# include "../libft/libft.h"
 
 # define WINDOW_WIDTH 600
 # define WINDOW_HEIGHT 300
+# define MAX_ITER 100
 
-typedef struct s_vars
+typedef struct t_vars
 {
 	void	*mlx;
 	void	*win;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
 	int		x;
 	int		y;
-}	t_vars;
+}				t_vars;
 
-typedef struct s_complex
+typedef struct t_complex
 {
 	double	re;
 	double	im;
-}	t_complex;
+}				t_complex;
 
 void	set_color(t_vars vars, int div);
-int		is_diverge(t_complex num, double (*f)(t_complex), int max_iteration);
+int		is_diverge(t_complex num);
 void	mandelbrot(t_vars vast);
 
 #endif

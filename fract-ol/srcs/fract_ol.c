@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 03:16:36 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/27 19:44:53 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/28 02:21:33 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ t_vars	init_window(char *title, t_vars vars)
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx,
 			WINDOW_WIDTH, WINDOW_HEIGHT, "Hello world!");
-	mlx_mouse_hook(vars.win, mouse_hook, &vars);
+	// if escape is pressed, close the window
+	mlx_hook(vars.win, 2, 1L<<0, mouse_hook, &vars);
 	mandelbrot(vars);
 	return (vars);
 }

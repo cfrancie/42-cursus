@@ -6,7 +6,7 @@
 #    By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/27 02:24:15 by cfrancie          #+#    #+#              #
-#    Updated: 2022/11/27 19:33:29 by cfrancie         ###   ########.fr        #
+#    Updated: 2022/11/28 02:49:22 by cfrancie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,46 +14,40 @@ NAME    = fractol
 CC      = gcc
 CFLAGS  = -Wall -Werror -Wall
 
-LIBX	= libmlx.a
-LIBFT	= libft.a
+LIBFT_DIR = ./libft/
+LIBFT = $(LIBFT_DIR)libft.a
 
-LIBX_P  = srcs/minilibx-linux/
-LIBFT_P = srcs/libft/
+MLX_DIR = ./minilibx-linux/
+MLX = $(MLX_DIR)libmlx.a
 
-LIBX_F  = $(addprefix $(LIBX_P), $(LIBX))
-LIBFT_F = $(addprefix $(LIBFT_P), $(LIBFT))
+SRCS_DIR = srcs/
+SRCS = calculator.c color.c fract_ol.c zoom.c
 
-INC     = -I ./includes/ -I ./libft/ -I ./minilibx-linux/
+OBJS_DIR = objs/
+OBJS = $(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 
-SRCS	= fract_ol.c color.c calculator.c
-SRCS_P	= srcs/
+all: $(NAME)
 
-OBJS	= $(SRCS:.c=.o)
-OBJS_P	= objs/
+$(NAME): $(OBJS)
+	@make -C $(LIBFT_DIR)
+	@make -C $(MLX_DIR)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(MLX) -Imlx -lXext -lX11 -lm -lz
+	@echo "Compilation done"
 
-OBJS_F	= $(addprefix $(OBJS_P), $(OBJS))
-SRCS_F	= $(addprefix $(SRCS_P), $(SRCS))
-
-all: $(NAME) $(LIBX_F) $(LIBFT_F)
-
-$(NAME): $(OBJS_F)
-	@make -C $(LIBFT_P)
-	@make -C $(LIBX_P)
-	@$(CC) -o $(NAME) $(OBJS_F) $(LIBX_F) $(LIBFT_F) $(INC) -lXext -lX11 -lm
-
-$(OBJS_P)%.o: $(SRCS_P)%.c
-	@mkdir -p $(OBJS_P)
-	@$(CC) $(CFLAGS) $(INC) -o $@ -c $<
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.c
+	@mkdir -p $(OBJS_DIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@rm -rf $(OBJS_P)
-	@make clean -C $(LIBFT_P)
-	@make clean -C $(LIBX_P)
+	@make -C $(LIBFT_DIR) clean
+	@make -C $(MLX_DIR) clean
+	@rm -rf $(OBJS_DIR)
+	@echo "Clean done"
 
 fclean: clean
-	@rm -rf $(NAME)
-	@make fclean -C $(LIBFT_P)
-	@make clean -C $(LIBX_P)
+	@make -C $(LIBFT_DIR) fclean
+	@rm -f $(NAME)
+	@echo "Fclean done"
 
 re: fclean all
 
