@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zoom.c                                             :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 20:44:35 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/29 20:46:43 by cfrancie         ###   ########.fr       */
+/*   Created: 2022/11/07 11:01:21 by cfrancie          #+#    #+#             */
+/*   Updated: 2022/11/07 11:10:11 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fract_ol.h"
+#include "libft.h"
 
-void    zoom(t_fractol *fractol, double value)
+int	ft_isdigit(int c)
 {
-    fractol->zoom *= value;
-    fractol->x1 *= value;
-    fractol->x2 *= value;
-    fractol->y1 *= value;
-    fractol->y2 *= value;
+	return (c >= '0' && c <= '9');
 }

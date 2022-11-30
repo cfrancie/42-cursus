@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zoom.c                                             :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 20:44:35 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/29 20:46:43 by cfrancie         ###   ########.fr       */
+/*   Created: 2022/11/07 11:55:00 by cfrancie          #+#    #+#             */
+/*   Updated: 2022/11/09 15:27:58 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fract_ol.h"
+#include "libft.h"
 
-void    zoom(t_fractol *fractol, double value)
+char	*ft_strchr(const char *s, int c)
 {
-    fractol->zoom *= value;
-    fractol->x1 *= value;
-    fractol->x2 *= value;
-    fractol->y1 *= value;
-    fractol->y2 *= value;
+	size_t	i;
+	char	tmp;
+
+	tmp = (char)c;
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == tmp)
+			return ((char *)s + i);
+		i++;
+	}
+	if (s[i] == tmp)
+		return ((char *)s + i);
+	return (NULL);
 }

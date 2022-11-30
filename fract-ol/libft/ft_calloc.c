@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zoom.c                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 20:44:35 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/29 20:46:43 by cfrancie         ###   ########.fr       */
+/*   Created: 2022/11/07 15:08:31 by cfrancie          #+#    #+#             */
+/*   Updated: 2022/11/09 16:49:32 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fract_ol.h"
+#include "libft.h"
 
-void    zoom(t_fractol *fractol, double value)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-    fractol->zoom *= value;
-    fractol->x1 *= value;
-    fractol->x2 *= value;
-    fractol->y1 *= value;
-    fractol->y2 *= value;
+	void	*res;
+
+	if (nmemb == SIZE_MAX || size == SIZE_MAX)
+		return (NULL);
+	res = malloc(nmemb * size);
+	if (!res)
+		return (NULL);
+	ft_bzero(res, nmemb * size);
+	return (res);
 }

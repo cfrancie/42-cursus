@@ -1,22 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zoom.c                                             :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 20:44:35 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/29 20:46:43 by cfrancie         ###   ########.fr       */
+/*   Created: 2022/11/07 14:21:52 by cfrancie          #+#    #+#             */
+/*   Updated: 2022/11/08 16:31:27 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fract_ol.h"
+#include "libft.h"
 
-void    zoom(t_fractol *fractol, double value)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-    fractol->zoom *= value;
-    fractol->x1 *= value;
-    fractol->x2 *= value;
-    fractol->y1 *= value;
-    fractol->y2 *= value;
+	size_t	i;
+	size_t	j;
+
+	if (little[0] == '\0')
+		return ((char *)big);
+	i = 0;
+	j = 0;
+	while (big[i] && i < len)
+	{
+		while (big[i + j] && (big[i + j] == little[j]) && i + j < len)
+			j++;
+		if (little[j] == '\0')
+			return ((char *)(big + i));
+		i++;
+		j = 0;
+	}
+	return (NULL);
 }

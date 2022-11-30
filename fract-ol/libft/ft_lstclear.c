@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zoom.c                                             :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 20:44:35 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/29 20:46:43 by cfrancie         ###   ########.fr       */
+/*   Created: 2022/11/09 12:17:47 by cfrancie          #+#    #+#             */
+/*   Updated: 2022/11/09 13:03:58 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fract_ol.h"
+#include "libft.h"
 
-void    zoom(t_fractol *fractol, double value)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-    fractol->zoom *= value;
-    fractol->x1 *= value;
-    fractol->x2 *= value;
-    fractol->y1 *= value;
-    fractol->y2 *= value;
+	t_list	*tmp;
+	t_list	*tmp2;
+
+	if (!lst || !*lst)
+		return ;
+	tmp = *lst;
+	while (tmp)
+	{
+		tmp2 = tmp->next;
+		ft_lstdelone(tmp, del);
+		tmp = tmp2;
+	}
+	*lst = NULL;
 }

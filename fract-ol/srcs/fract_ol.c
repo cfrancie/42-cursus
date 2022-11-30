@@ -6,39 +6,45 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 03:16:36 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/28 02:21:33 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/30 19:33:18 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fract_ol.h"
 
-int	mouse_hook(int keycode, t_vars *vars)
+void	ft_init_window(t_fractol *fractol, char **argv)
 {
-	mlx_clear_window(vars->mlx, vars->win);
-	return (0);
-}
-
-t_vars	init_window(char *title, t_vars vars)
-{
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx,
-			WINDOW_WIDTH, WINDOW_HEIGHT, "Hello world!");
-	// if escape is pressed, close the window
-	mlx_hook(vars.win, 2, 1L<<0, mouse_hook, &vars);
-	mandelbrot(vars);
-	return (vars);
+	fractol = (t_fractol *)malloc(sizeof(t_fractol));
+	fractol->mlx = mlx_init();
+	fractol->win = mlx_new_window(fractol->mlx,
+			WINDOW_WIDTH, WINDOW_HEIGHT, argv[1]);
+	fractol->img = mlx_new_image(fractol->mlx,
+			WINDOW_WIDTH, WINDOW_HEIGHT);
+	fractol->data = (int *)mlx_get_data_addr(fractol->img,
+			&fractol->bpp, &fractol->size_line, &fractol->endian);
+	mlx_put_image_to_window(fractol->mlx, fractol->win, fractol->img, 0, 0);
+	if (ft_strncmp(argv[1], "Mendelbrot", 11) == 0)
+		mendelbort(*fractol);
+	else if (ft_strncmp(argv[1], "Julia", 6) == 0)
+		julia(*fractol);
+	mlx_loop(fractol->mlx);
 }
 
 int	main(int argc, char **argv)
 {
-	t_vars	vars;
+	t_fractol	*fractol;
 
 	if (argc != 2)
 	{
-		printf("Usage: ./fractol [fractal name]\n");
+		ft_putstr_fd("usage: ./fractol [fractal name]", 1);
 		return (0);
 	}
-	vars = init_window(argv[1], vars);
-	mlx_loop(vars.mlx);
+	fractol = NULL;
+	if (ft_strncmp(argv[1], "Mendelbrot", 11) == 0)
+		ft_init_window(fractol, argv);
+	else if (ft_strncmp(argv[1], "Julia", 6) == 0)
+		ft_init_window(fractol, argv);
+	else
+		ft_putstr_fd("usage: ./fractol [fractal name]", 1);
 	return (0);
 }

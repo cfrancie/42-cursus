@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/27 02:23:32 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/27 19:42:11 by cfrancie         ###   ########.fr       */
+/*   Created: 2022/11/07 22:06:19 by cfrancie          #+#    #+#             */
+/*   Updated: 2022/11/08 10:35:33 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fract_ol.h"
+#include "libft.h"
 
-void	set_color(t_vars vars, int div)
+void	ft_putnbr_fd(int n, int fd)
 {
-	if (div)
-		mlx_pixel_put(vars.mlx, vars.win, vars.x, vars.y, 0x0033FF);
-	else
-		mlx_pixel_put(vars.mlx, vars.win, vars.x, vars.y, 0xFF33FF);
+	if (n == -2147483648)
+	{
+		ft_putstr_fd("-2147483648", fd);
+		return ;
+	}
+	if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		n = -n;
+	}
+	if (n >= 10)
+		ft_putnbr_fd(n / 10, fd);
+	ft_putchar_fd(n % 10 + '0', fd);
 }

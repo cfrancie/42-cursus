@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 15:41:13 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/28 02:29:55 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/11/30 19:33:29 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,29 +29,26 @@
 
 # define WINDOW_WIDTH 600
 # define WINDOW_HEIGHT 300
-# define MAX_ITER 100
 
-typedef struct t_vars
+typedef struct s_fractol
 {
 	void	*mlx;
 	void	*win;
 	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
+	int		*data;
+	int		bpp;
+	int		size_line;
 	int		endian;
-	int		x;
-	int		y;
-}				t_vars;
+	double	x1;
+	double	x2;
+	double	y1;
+	double	y2;
+	double	zoom;
+}	t_fractol;
 
-typedef struct t_complex
-{
-	double	re;
-	double	im;
-}				t_complex;
+void	ft_init_window(t_fractol *fractol, char **argv);
 
-void	set_color(t_vars vars, int div);
-int		is_diverge(t_complex num);
-void	mandelbrot(t_vars vast);
+void    mendelbort(t_fractol fract);
+void    julia(t_fractol fract);
 
 #endif
