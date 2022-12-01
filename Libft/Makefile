@@ -6,15 +6,19 @@
 #    By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/08 19:04:31 by cfrancie          #+#    #+#              #
-#    Updated: 2022/11/25 16:00:16 by cfrancie         ###   ########.fr        #
+#    Updated: 2022/12/01 03:44:22 by cfrancie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror -I.
+CFLAGS		= -Wall -Wextra -Werror
+
 NAME		= libft.a
 
-SRCS		= ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
+SCRS_DIR	= srcs
+OBJS_DIR	= objs
+
+SRCS_NAME	=  ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 			ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c \
 			ft_memmove.c ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c \
 			ft_strchr.c ft_strrchr.c ft_strncmp.c ft_memchr.c \
@@ -23,30 +27,43 @@ SRCS		= ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 			ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c \
 			ft_putendl_fd.c ft_putnbr_fd.c
 
-BONUS_SRCS	= ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
-			ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c \
-			ft_lstmap.c
+BONUS_NAME	= ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
+            ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c \
+            ft_lstmap.c
 
-OBJS		= $(SRCS:.c=.o)
-BONUS_OBJS	= $(BONUS_SRCS:.c=.o)
+OBJS_NAME	= $(SRCS_NAME:.c=.o)
+OBJSB_NAME	= $(BONUS_NAME:.c=.o)
 
-.c.o:
-	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+SRCS		= $(addprefix $(SCRS_DIR)/, $(SRCS_NAME))
+BONUS		= $(addprefix $(SCRS_DIR)/, $(BONUS_NAME))
+OBJS		= $(addprefix $(OBJS_DIR)/, $(OBJS_NAME))
+BONUS_OBJS	= $(addprefix $(OBJS_DIR)/, $(OBJSB_NAME))
 
 all: $(NAME)
+	@echo "Compilation done"
 
-$(NAME):	$(OBJS)
-	ar rcs $(NAME) $(OBJS)
+$(NAME): $(OBJS)
+	@ar rc $(NAME) $(OBJS)
+	@ranlib $(NAME)
 
-bonus: $(BONUS_OBJS) $(OBJS)
-	ar rcs $(NAME) $(BONUS_OBJS) $(OBJS)
+$(OBJS_DIR)/%.o: $(SCRS_DIR)/%.c
+	@mkdir -p $(OBJS_DIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+bonus: $(OBJS) $(BONUS_OBJS)
+	@ar rc $(NAME) $(OBJS) $(BONUS_OBJS)
+	@ranlib $(NAME)
+	@echo "Compilation (bonus) done"
 
 clean:
-	rm -f $(OBJS) $(BONUS_OBJS)
+	@rm -rf $(OBJS_DIR)
+	@echo "Clean done"
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
+	@echo "Fclean done"
 
-re: fclean $(NAME)
+re: fclean all
+	@echo "Re done"
 
-.PHONY: all bonus clean fclean re
+.PHONY: all clean fclean re bonus
