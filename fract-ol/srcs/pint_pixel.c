@@ -1,22 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zoom.c                                             :+:      :+:    :+:   */
+/*   pint_pixel.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/29 20:44:35 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/29 20:46:43 by cfrancie         ###   ########.fr       */
+/*   Created: 2022/12/04 06:55:43 by cfrancie          #+#    #+#             */
+/*   Updated: 2022/12/04 09:02:14 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fract_ol.h"
 
-void    zoom(t_fractol *fractol, double value)
+/*
+Repete la fonction 
+*/
+int	is_divergent(double re, double im, double (*f)(double))
+
+/*
+Fait un produit en crois pour calculer la position du pixel sur l'ecran par 
+rapport oux coordonees du plans
+*/
+double	cross_multiplication(double fract, int screen)
 {
-    fractol->zoom *= value;
-    fractol->x1 *= value;
-    fractol->x2 *= value;
-    fractol->y1 *= value;
-    fractol->y2 *= value;
+	
 }
+
+/*
+Affiche le pixel avec la coueur donner
+*/
+void	putixel()

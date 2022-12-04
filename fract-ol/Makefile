@@ -6,49 +6,56 @@
 #    By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/27 02:24:15 by cfrancie          #+#    #+#              #
-#    Updated: 2022/11/29 20:37:25 by cfrancie         ###   ########.fr        #
+#    Updated: 2022/12/04 08:25:56 by cfrancie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= fractol
-CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror
-XFLAGS	= -lmlx -framework OpenGL -framework AppKit
+NAME		= fractol
+CC			= gcc
+CFLAGS		= -Wall -Wextra -Werror
 
-LIBFT	= libft/libft.a
-MLX		= minilibx-linux/libmlx.a
+LIBFT		= libft/libft.a
+MLX			= minilibx-linux/libmlx.a
 
-SRCS_DIR	= srcs
+SCRS_DIR	= srcs
 OBJS_DIR	= objs
-INCS_DIR	= includes
 
-SRCS	= fract_ol.c
-OBJS	= $(SRCS:.c=.o)
+SRCS_NAME	= fract_ol.c keyboard.c zoom.c
+OBJS_NAME	= $(SRCS:.c=.o)
+
+OBJS_NAME	= $(SRCS_NAME:.c=.o)
+OBJSB_NAME	= $(BONUS_NAME:.c=.o)
+
+SRCS		= $(addprefix $(SCRS_DIR)/, $(SRCS_NAME))
+OBJS		= $(addprefix $(OBJS_DIR)/, $(OBJS_NAME))
 
 all: $(NAME)
+	@echo "Compilation done"
 
 $(NAME): $(OBJS)
 	@make -C libft
 	@make -C minilibx-linux
-	@$(CC) $(CFLAGS) $(XFLAGS) $(OBJS) $(LIBFT) $(MLX) -o $(NAME)
+	@ar rc $(NAME) $(OBJS)
 	@echo "Compilation done"
-	
-%.o: $(SRCS_DIR)/%.c
-	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INCS_DIR)
+
+$(OBJS_DIR)/%.o: $(SCRS_DIR)/%.c
+	@mkdir -p $(OBJS_DIR)
+	@$(CC) $(CFLAGS) -Imlx -c $< -o $@
 	@echo "Compilation of $<"
 
 clean:
+	@rm -rf $(OBJS_DIR)
 	@make clean -C libft
 	@make clean -C minilibx-linux
-	@rm -f $(OBJS)
 	@echo "Clean done"
 
 fclean: clean
-	@make fclean -C libft
 	@rm -f $(NAME)
+	@make fclean -C libft
+	@make fclean -C minilibx-linux
 	@echo "Fclean done"
 
 re: fclean all
 	@echo "Re done"
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus

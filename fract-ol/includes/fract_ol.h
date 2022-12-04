@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 15:41:13 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/30 19:33:29 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/12/04 07:36:28 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,25 +30,22 @@
 # define WINDOW_WIDTH 600
 # define WINDOW_HEIGHT 300
 
-typedef struct s_fractol
+typedef struct s_vars
 {
+	int		x_screen;
+	int		y_screen;
+	double	x_fract;
+	double	y_fract;
+	double	zoom_value;
 	void	*mlx;
-	void	*win;
-	void	*img;
-	int		*data;
-	int		bpp;
-	int		size_line;
-	int		endian;
-	double	x1;
-	double	x2;
-	double	y1;
-	double	y2;
-	double	zoom;
-}	t_fractol;
+	void	*mlx_win;
+	int		window_width;
+	int		window_height;
+}	t_vars;
 
-void	ft_init_window(t_fractol *fractol, char **argv);
 
-void    mendelbort(t_fractol fract);
-void    julia(t_fractol fract);
+// fract_ol.c
+void	init_vars(t_vars *vars);
+void	init_window(char *arg);
 
 #endif
