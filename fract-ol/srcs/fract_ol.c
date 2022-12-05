@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 03:16:36 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/12/05 19:42:29 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/12/05 22:25:29 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,7 @@ void	init_vars(t_vars *vars)
 	vars->window_width = 800;
 	vars->window_height = 600;
 	vars->mlx_win = mlx_new_window(vars->mlx, vars->window_width, vars->window_height, "fract_ol");
-	vars->img = ft_calloc(vars->window_width * vars->window_height, sizeof(int));
-	if (!vars->img)
-	{
-		perror("ft_calloc");
-		exit(EXIT_FAILURE);
-	}
-	vars->zoom = 1;
+	vars->zoom = 0.5;
 	vars->x_screen = 0;
 	vars->y_screen = 0;
 	vars->re = 0;
@@ -51,7 +45,7 @@ void	init_window(char *arg)
 		printf("Error\n");
 		exit(0);
 	}
-	put_img_tab(&vars);
+	mandelbrot(&vars);
 	mlx_loop(vars.mlx);
 }
 

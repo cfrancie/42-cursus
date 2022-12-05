@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 15:41:13 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/12/05 19:41:44 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/12/05 22:24:34 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef struct s_vars
 	void	*mlx_win;
 	int		window_width;
 	int		window_height;
-	int		*img;
 	double	zoom;
 	int		x_screen;
 	int		y_screen;
@@ -48,9 +47,8 @@ void	init_vars(t_vars *vars);
 void	init_window(char *arg);
 
 // print_pixel.c
-int		is_diverge(double res);
+int		is_diverge(t_vars *vars);
 void	mandelbrot(t_vars *vars);
-void	put_img_tab(t_vars *vars);
 
 // utilities.c
 
