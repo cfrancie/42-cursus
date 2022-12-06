@@ -6,47 +6,56 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 06:55:43 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/12/05 22:36:21 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/12/06 04:27:47 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fract_ol.h"
 
-double	power_complex(double re, double im)
+
+t_complex	square(double re, double im)
 {
-	return (re * re - im * im);
+	t_complex	z;
+
+	z.re = re * re - im * im;
+	z.im = 2 * re * im;
+	return (z);
 }
 
-int	is_diverge(t_vars *vars)
+/*
+type = 0 -> mandelbrot
+type = 1 -> julia
+type = 2 -> burning_ship
+*/
+int	is_diverge(t_vars *vars, int max_iteration)
 {
-	double	tmp_re;
-	double	tmp_im;
-	int		i;
-	
+	int			i;
+	t_complex	z;
+
 	i = 0;
-	while (i < 100)
+	z.re = 0;
+	z.im = 0;
+	while (i < max_iteration)
 	{
-		tmp_re = power_complex(vars->re, vars->im);
-		tmp_im = 2 * vars->re * vars->im;
-		vars->re = tmp_re + vars->old_re;
-		vars->im = tmp_im + vars->old_im;
-		if (vars->re * vars->re + vars->im * vars->im > 4)
-			return (0);
+		z = square(z.re, z.im);
+		z.re += vars->re;
+		z.im += vars->im;
+		if (z.re * z.re + z.im * z.im > 4)
+			return (i);
 		i++;
 	}
 	return (i);
 }
 
-void	put_color(t_vars *vars, int x, int y, int color)
+void	put_color(t_vars *vars, int x, int y, int color, int max_iteration)
 {
-	// displays the color as a function of time to converge and black if it converges
-	if (color == 100)
+	if (color == max_iteration)
 		mlx_pixel_put(vars->mlx, vars->mlx_win, x, y, 0x000000);
 	else
-		mlx_pixel_put(vars->mlx, vars->mlx_win, x, y, 0x00FFFFFF);
+		mlx_pixel_put(vars->mlx, vars->mlx_win, x, y, 0x0A50FF * color % 0xFFFFFF);
 }
 
-void	mandelbrot(t_vars *vars)
+void	fractal(t_vars *vars, int max_iteration)
 {
 	int		x;
 	int		y;
@@ -58,12 +67,10 @@ void	mandelbrot(t_vars *vars)
 		y = 0;
 		while (y < vars->window_height)
 		{
-			vars->re = 1.5 * (x - vars->window_width / 2) / (0.5 * vars->zoom * vars->window_width) + vars->x_screen;
-			vars->im = (y - vars->window_height / 2) / (0.5 * vars->zoom * vars->window_height) + vars->y_screen;
-			vars->old_re = vars->re;
-			vars->old_im = vars->im;
-			i = is_diverge(vars);
-			put_color(vars, x, y, i);
+			vars->re = 1.5 * (x - vars->window_width / 2) / (0.5 * vars->zoom * vars->window_width) + vars->move_x;
+			vars->im = (y - vars->window_height / 2) / (0.5 * vars->zoom * vars->window_height) + vars->move_y;
+			i = is_diverge(vars, max_iteration);
+			put_color(vars, x, y, i, max_iteration);
 			y++;
 		}
 		x++;
