@@ -6,12 +6,12 @@
 #    By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/27 02:24:15 by cfrancie          #+#    #+#              #
-#    Updated: 2022/12/07 00:58:37 by cfrancie         ###   ########.fr        #
+#    Updated: 2022/12/07 21:28:44 by cfrancie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		= fractol
-CC			= gcc
+CC			= gcc -O3
 CFLAGS		= -Wall -Wextra -Werror
 
 MLX_PATH	= ./minilibx-linux/
@@ -36,6 +36,7 @@ all: $(MLX) $(LIBFT) $(NAME)
 
 $(OBJS_PATH)%.o: $(SRCS_PATH)%.c
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
+	@echo "Compiling $<"
 	
 $(OBJS): $(OBJS_PATH)
 
@@ -43,17 +44,15 @@ $(OBJS_PATH):
 	@mkdir -p $(OBJS_PATH)
 
 $(MLX):
-	@make -sC $(MLX_PATH)
+	@make -C $(MLX_PATH)
 
 $(LIBFT):
-	@make -sC $(LIBFT_PATH)
+	@make -C $(LIBFT_PATH)
 	
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $(INC) $(OBJS) $(MLX) $(LIBFT) -o $(NAME) -lXext -lX11 -lm
-	@echo "Compilation done"
 
 clean:
-	@make -C $(MLX_PATH) clean
 	@make -C $(LIBFT_PATH) clean
 	@rm -rf $(OBJS_PATH)
 	@echo "Clean done"
