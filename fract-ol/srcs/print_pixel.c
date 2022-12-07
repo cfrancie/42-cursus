@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 06:55:43 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/12/06 04:27:47 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/12/07 01:03:21 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,15 @@ int	is_diverge(t_vars *vars, int max_iteration)
 }
 
 void	put_color(t_vars *vars, int x, int y, int color, int max_iteration)
-{
+{	
 	if (color == max_iteration)
+	{
 		mlx_pixel_put(vars->mlx, vars->mlx_win, x, y, 0x000000);
+	}
 	else
-		mlx_pixel_put(vars->mlx, vars->mlx_win, x, y, 0x0A50FF * color % 0xFFFFFF);
+	{
+		mlx_pixel_put(vars->mlx, vars->mlx_win, x, y, 0xF0F0F0 * color % 0xFFFFFF);
+	}
 }
 
 void	fractal(t_vars *vars, int max_iteration)

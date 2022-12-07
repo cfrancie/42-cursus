@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 15:41:13 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/12/06 04:25:25 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/12/07 01:01:03 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ typedef struct s_vars
 	void	*mlx_win;
 	int		window_width;
 	int		window_height;
-	double	zoom;
 	int		x_screen;
 	int		y_screen;
+	double	zoom;
 	double	re;
 	double	im;
 	double	move_x;
@@ -53,12 +53,17 @@ typedef struct s_vars
 // fract_ol.c
 void		init_vars(t_vars *vars);
 void		init_window(char *arg);
+int		zoom(int button, int x, int y, t_vars *vars);
 
 // print_pixel.c
 void		fractal(t_vars *vars, int max_iteration);
 void		put_color(t_vars *vars, int x, int y, int color, int max_iteration);
 int			is_diverge(t_vars *vars, int max_iteration);
 t_complex	square(double re, double im);
+
+// keyboard.c
+int		input_vars(t_vars *vars);
+int		close_window(t_vars *vars);
 
 
 #endif

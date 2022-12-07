@@ -6,7 +6,7 @@
 #    By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/27 02:24:15 by cfrancie          #+#    #+#              #
-#    Updated: 2022/12/05 14:34:08 by cfrancie         ###   ########.fr        #
+#    Updated: 2022/12/07 00:58:37 by cfrancie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ LIBFT		= $(addprefix $(LIBFT_PATH), $(LIBFT_NAME))
 INC			= -I ./includes/ -I $(LIBFT_PATH) -I $(MLX_PATH)
 
 SRCS_PATH	= ./srcs/
-SRC			= fract_ol.c keyboard.c print_pixel.c
+SRC			= fract_ol.c input.c print_pixel.c
 SRCS		= $(addprefix $(SRCS_PATH), $(SRC))
 
 OBJS_PATH	= ./objs/
