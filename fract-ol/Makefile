@@ -6,7 +6,7 @@
 #    By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/27 02:24:15 by cfrancie          #+#    #+#              #
-#    Updated: 2022/12/07 21:28:44 by cfrancie         ###   ########.fr        #
+#    Updated: 2022/12/08 17:29:18 by cfrancie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,10 @@ all: $(MLX) $(LIBFT) $(NAME)
 $(OBJS_PATH)%.o: $(SRCS_PATH)%.c
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 	@echo "Compiling $<"
-	
+
+$(NAME): $(OBJS)
+	@$(CC) $(CFLAGS) $(INC) $(OBJS) $(MLX) $(LIBFT) -o $(NAME) -lXext -lX11 -lm
+
 $(OBJS): $(OBJS_PATH)
 
 $(OBJS_PATH):
@@ -49,8 +52,7 @@ $(MLX):
 $(LIBFT):
 	@make -C $(LIBFT_PATH)
 	
-$(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(INC) $(OBJS) $(MLX) $(LIBFT) -o $(NAME) -lXext -lX11 -lm
+
 
 clean:
 	@make -C $(LIBFT_PATH) clean

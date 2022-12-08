@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 15:41:13 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/12/07 20:06:48 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/12/08 18:15:31 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_vars
 	double		move_y;
 	int			max_iter;
 	int			type;
-	void 		*img;
+	void		*img;
 	char		*addr;
 	int			bits_per_pixel;
 	int			line_length;
@@ -61,13 +61,14 @@ void		init_window(char **argv, int argc);
 int			zoom(int button, int x, int y, t_vars *vars);
 
 // print_pixel.c
-void		fractal(t_vars *vars, int max_iteration);
-void		put_color(t_vars *vars, int x, int y, int color, int max_iteration);
+t_complex	init_comp(t_vars *vars, t_complex z);
 int			is_diverge(int max_iteration, t_complex z, int type, t_vars *vars);
-t_complex	square(double re, double im);
+void		my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
+void		put_color(t_vars *vars, int x, int y, t_complex z);
+void		fractal(t_vars *vars);
+int			key_hook(int keycode, t_vars *vars);
 
 // keyboard.c
-int			input_vars(t_vars *vars);
 int			close_window(t_vars *vars);
 
 #endif
