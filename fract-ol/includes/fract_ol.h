@@ -27,29 +27,33 @@
 # include "../minilibx-linux/mlx.h"
 # include "../libft/libft.h"
 
+# define WIDTH 800
+# define HEIGHT 800
+
 typedef struct s_complex
 {
-	double	re;
-	double	im;
+	double	re_x;
+	double	im_y;
 }	t_complex;
+
+typedef struct s_coords
+{
+	int	x;
+	int	y;
+}	t_coords;
 
 typedef struct s_vars
 {
-	void		*mlx;
-	void		*mlx_win;
-	int			window_width;
-	int			window_height;
-	int			x_screen;
-	int			y_screen;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	void		*img_ptr;
+	char		*addr_ptr;
+	t_coords 	screen;
+	t_complex	comp;
+	t_complex	move;
+	int		 	max_iter;
 	double		zoom;
-	double		re;
-	double		im;
-	double		move_x;
-	double		move_y;
-	int			max_iter;
-	int			type;
-	void		*img;
-	char		*addr;
+	uint8_t 	type;
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
@@ -57,7 +61,7 @@ typedef struct s_vars
 
 // fract_ol.c
 void		init_vars(t_vars *vars);
-void		init_window(char **argv, int argc);
+void		init_window(uint8_t argc);
 int			zoom(int button, int x, int y, t_vars *vars);
 
 // print_pixel.c

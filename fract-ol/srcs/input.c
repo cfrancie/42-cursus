@@ -17,23 +17,19 @@ Close and free the window
 */
 int	close_window(t_vars *vars)
 {
-	mlx_loop_end(vars->mlx);
-	mlx_destroy_display(vars->mlx);
-	free(vars->mlx);
-	free(vars->mlx_win);
-	free(vars->img);
-	free(vars->addr);
+	mlx_loop_end(vars->mlx_ptr);
+	mlx_destroy_display(vars->mlx_ptr);
+	free(vars->mlx_ptr);
 	exit(0);
-	return (0);
 }
 
 int	key_hook(int keycode, t_vars *vars)
 {
 	if (keycode == 65307)
 	{
-		mlx_destroy_image(vars->mlx, vars->img);
-		mlx_destroy_window(vars->mlx, vars->mlx_win);
-		free(vars->mlx);
+		mlx_destroy_image(vars->mlx_ptr, vars->img_ptr);
+		mlx_destroy_window(vars->mlx_ptr, vars->win_ptr);
+		free(vars->mlx_ptr);
 		exit(0);
 	}
 	if (keycode == 65451 && vars->max_iter < 1000)
@@ -44,8 +40,8 @@ int	key_hook(int keycode, t_vars *vars)
 	{
 		vars->max_iter = 100;
 		vars->zoom = 1;
-		vars->move_x = 0;
-		vars->move_y = 0;
+		vars->move.re_x = 0;
+		vars->move.im_y = 0;
 	}
 	fractal(vars);
 	return (0);
