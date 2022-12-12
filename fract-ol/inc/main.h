@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 21:55:15 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/12/11 03:44:41 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/12/12 16:28:26 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ typedef struct s_complex
 {
 	double		re;
 	double		im;
-}   t_complex;
+}	t_complex;
 
 typedef struct s_screen
 {
 	int			x;
 	int			y;
-}   t_screen;
+}	t_screen;
 
 typedef struct s_vars
 {
@@ -62,7 +62,7 @@ typedef struct s_vars
 	t_screen	window_pos;
 	t_complex	c;
 	t_complex	move;
-}   t_vars;
+}	t_vars;
 
 // prototypes
 // main.c
@@ -70,14 +70,17 @@ void	init_vars(t_vars *vars);
 void	put_text(t_vars *vars);
 
 // draw.c
+void	chose_color(t_vars *vars, int x, int y, int i);
 void	fractal(t_vars *vars);
-void	mandelbrot(t_vars *vars, int x, int y);
-void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 
 // input.c
-int		close_window(t_vars *vars);
+int		key_hook(int keycode, t_vars *vars);
 int		mouse_hook(int button, int x, int y, t_vars *vars);
-int     key_hook(int keycode, t_vars *vars);
+int		close_window(t_vars *vars);
 
+// generate.c
+void	mandelbrot(t_vars *vars, int x, int y);
+void	julia(t_vars *vars, int x, int y);
+void	burning_ship(t_vars *vars, int x, int y);
 
 #endif
