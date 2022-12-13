@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 22:16:56 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/12/12 16:28:02 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/12/13 22:26:02 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,19 @@ int	mouse_hook(int button, int x, int y, t_vars *vars)
 
 int	close_window(t_vars *vars)
 {
-	mlx_loop_end(vars->mlx_ptr);
-	mlx_destroy_display(vars->mlx_ptr);
-	free(vars->mlx_ptr);
+	if (!vars)
+		exit(0);
+	if (!vars->addr)
+		free(vars->addr);
+	if (vars->img_ptr)
+		mlx_destroy_image(vars->mlx_ptr, vars->img_ptr);
+	if (vars->win_ptr && vars->mlx_ptr)
+		mlx_destroy_window(vars->mlx_ptr, vars->win_ptr);
+	if (vars->mlx_ptr)
+	{
+		mlx_loop_end(vars->mlx_ptr);
+		mlx_destroy_display(vars->mlx_ptr);
+		free(vars->mlx_ptr);
+	}
 	exit(0);
 }

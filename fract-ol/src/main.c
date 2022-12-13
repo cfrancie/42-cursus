@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 21:57:31 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/12/13 18:36:04 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/12/13 22:33:42 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,25 +58,25 @@ int	main(int argc, char **argv)
 {
 	t_vars	vars;
 
-	if ((argc != 2 && argc != 3) || (ft_strncmp(argv[1], "mandelbrot", 11)
-			&& ft_strncmp(argv[1], "julia", 6)
-			&& ft_strncmp(argv[1], "burning_ship", 13)))
+	if ((argc != 2 && argc != 3) && (!ft_strcmp(argv[1], "mandelbrot")
+			|| !ft_strcmp(argv[1], "julia")
+			|| !ft_strcmp(argv[1], "burning_ship")))
 	{
 		print_param();
 		return (0);
 	}
 	init_vars(&vars);
-	if (!ft_strncmp(argv[1], "mandelbrot", 11))
+	if (!ft_strcmp(argv[1], "mandelbrot"))
 		vars.type = 0;
-	else if (!ft_strncmp(argv[1], "julia", 6))
+	else if (!ft_strcmp(argv[1], "julia"))
 		vars.type = 1;
-	else if (!ft_strncmp(argv[1], "burning_ship", 13))
+	else if (!ft_strcmp(argv[1], "burning_ship"))
 		vars.type = 2;
 	else if (argc == 3)
 	{
 		vars.type = 3;
-		vars.c.re = ft_atof(argv[1]);
-		vars.c.im = ft_atof(argv[2]);
+		vars.c.re = ft_atof(argv[2]);
+		vars.c.im = ft_atof(argv[3]);
 	}
 	start(&vars);
 	return (0);

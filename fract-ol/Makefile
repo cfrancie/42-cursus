@@ -5,64 +5,56 @@
 #                                                     +:+ +:+         +:+      #
 #    By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/12/13 18:21:26 by cfrancie          #+#    #+#              #
-#    Updated: 2022/12/13 18:40:51 by cfrancie         ###   ########.fr        #
+#    Created: 2022/12/13 21:35:32 by cfrancie          #+#    #+#              #
+#    Updated: 2022/12/13 22:04:03 by cfrancie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME 		= fractol
-CC			= gcc -O3
-CFLAGS		= -Wall -Wextra -Werror
+CC		= gcc
+CFLAGS	= -Wall -Wextra -Werror
+INC		= -I./include/ -I./minilibx-linux
+OBJDIR	= ./obj/
+SRCDIR	= ./src/
 
-MLX_PATH	= ./lib/minilibx-linux/
-MLX_NAME	= libmlx.a
-MLX			= $(addprefix $(MLX_PATH), $(MLX_NAME))
+NAME	= fractol
 
-LIBFT_PATH	= ./lib/libft/
-LIBFT_NAME	= libft.a
-LIBFT		= $(addprefix $(LIBFT_PATH), $(LIBFT_NAME))
+SRC		= main.c \
+		input.c \
+		generate.c \
+		draw.c \
+		utility.c
 
-INC			= -I ./inc/ -I $(LIBFT_PATH)/ -I $(MLX_PATH)/
+SRCS	= $(addprefix $(SRCDIR), $(SRC))
 
-SRCS_PATH	= ./src/
-SRC			= main.c input.c draw.c generate.c
-SRCS		= $(addprefix $(SRCS_PATH), $(SRC))
+OBJ		= $(SRC:.c=.o)
 
-OBJS_PATH	= ./obj/
-OBJ			= $(SRC:.c=.o)
-OBJS		= $(addprefix $(OBJS_PATH), $(OBJ))
+OBJS	= $(addprefix $(OBJDIR), $(OBJ))
 
-all: $(MLX) $(LIBFT) $(NAME)
+LIBX	= ./lib/minilibx-linux
 
-$(OBJS_PATH)%.o: $(SRCS_PATH)%.c
-	$(CC) $(CFLAGS) $(INC) -c $< -o $
-	
-$(OBJS): $(OBJS_PATH)
+all: $(NAME)
 
-$(OBJS_PATH):
-	mkdir -p $(OBJS_PATH)
-
-$(MLX):
-	make -sC $(MLX_PATH)
-
-$(LIBFT):
-	make -sC $(LIBFT_PATH)
-	
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(INC) $(OBJS) $(MLX) $(LIBFT) -o $(NAME) -lXext -lX11 -lm
-	echo "Compilation done"
+	@make -C $(LIBX)
+	@$(CC) $(CFLAGS) $(INC) -o $(NAME) $(OBJS) -L$(LIBX) -lmlx -lXext -lX11 -lm -lbsd -g3 -O3
+	@echo "compilation of $(NAME) done"
+
+$(OBJDIR)%.o: $(SRCDIR)%.c
+	@mkdir -p $(OBJDIR)
+	@$(CC) $(CFLAGS) $(INC) -o $@ -c $<
+	@echo "compilation of $@ done"
 
 clean:
-	make -C $(MLX_PATH) clean
-	make -C $(LIBFT_PATH) clean
-	rm -rf $(OBJS_PATH)
-	echo "Clean done"
+	@make clean -C $(LIBX)
+	@rm -rf $(OBJDIR)
+	@echo "clean done"
 
 fclean: clean
-	make -C $(LIBFT_PATH) fclean
-	rm -f $(NAME)
-	echo "Fclean done"
+	@make clean -C $(LIBX)
+	@rm -f $(NAME)
+	@echo "fclean done"
 
 re: fclean all
+	@echo "re done"
 
 .PHONY: all clean fclean re
