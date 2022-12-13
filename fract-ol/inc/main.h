@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 21:55:15 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/12/12 16:28:26 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/12/13 18:42:29 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@
 
 typedef struct s_complex
 {
-	double		re;
-	double		im;
+	long double		re;
+	long double		im;
 }	t_complex;
 
 typedef struct s_screen
@@ -49,19 +49,19 @@ typedef struct s_screen
 
 typedef struct s_vars
 {
-	void		*mlx_ptr;
-	void		*win_ptr;
-	void		*img_ptr;
-	char		*addr;
-	uint8_t		type;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
-	double		zoom;
-	int			max_iter;
-	t_screen	window_pos;
-	t_complex	c;
-	t_complex	move;
+	void			*mlx_ptr;
+	void			*win_ptr;
+	void			*img_ptr;
+	char			*addr;
+	uint8_t			type;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
+	long double		zoom;
+	int				max_iter;
+	t_screen		window_pos;
+	t_complex		c;
+	t_complex		move;
 }	t_vars;
 
 // prototypes

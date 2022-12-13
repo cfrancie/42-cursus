@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 21:57:31 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/12/12 16:51:38 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/12/13 18:36:04 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	put_text(t_vars *vars)
 		ft_itoa(vars->max_iter));
 }
 
-static void	print_param(void)
+static ssize_t	print_param(void)
 {
-	write(1, "Usage: ./fractol [OPTION...] [SECTION]\n\tmandelbrot\t\
-	z² + c\n\tjulia\tz² - 1.4\n\tburning_ship\tz² + abs(c)\n", 104);
+	return (write(1, "Usage: ./fractol [OPTION...] [SECTION]\n\t \
+	mandelbrot\tz² + c\n\tjulia\tz² - 1.4\n\tburning_ship\tz² + abs(c)\n", 104));
 }
 
 void	init_vars(t_vars *vars)
@@ -46,9 +46,9 @@ void	init_vars(t_vars *vars)
 
 void	start(t_vars *vars)
 {
-	mlx_hook(vars->win_ptr, 2, 1L << 0, key_hook, &vars);
-	mlx_hook(vars->win_ptr, 4, 1L << 2, mouse_hook, &vars);
-	mlx_hook(vars->win_ptr, 17, 1L << 17, close_window, &vars);
+	mlx_hook(vars->win_ptr, 2, 1L << 0, key_hook, vars);
+	mlx_hook(vars->win_ptr, 4, 1L << 2, mouse_hook, vars);
+	mlx_hook(vars->win_ptr, 17, 1L << 17, close_window, vars);
 	fractal(vars);
 	put_text(vars);
 	mlx_loop(vars->mlx_ptr);

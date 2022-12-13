@@ -6,16 +6,16 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 02:04:19 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/12/12 16:43:31 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/12/13 18:41:53 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-double	ft_atof(const char *str)
+long double	ft_atof(const char *str)
 {
-	double	res;
-	double	dec;
+	long double	res;
+	long double	dec;
 	int		i;
 	int		sign;
 

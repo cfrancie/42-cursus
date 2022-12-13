@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:25:44 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/12/12 16:34:06 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/12/13 18:45:31 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	mandelbrot(t_vars *vars, int x, int y)
 {
-	t_complex	z;
-	t_complex	o;
-	double		tmp;
-	int			i;
+	t_complex		z;
+	t_complex		o;
+	long double		tmp;
+	int				i;
 
 	o.re = 0;
 	o.im = 0;
@@ -38,9 +38,9 @@ void	mandelbrot(t_vars *vars, int x, int y)
 
 void	julia(t_vars *vars, int x, int y)
 {
-	t_complex	z;
-	double		tmp;
-	int			i;
+	t_complex		z;
+	long double		tmp;
+	int				i;
 
 	z.re = (x - WIN_WIDTH / 2)
 		/ (0.5 * vars->zoom * WIN_WIDTH) + vars->move.re;
@@ -57,12 +57,19 @@ void	julia(t_vars *vars, int x, int y)
 	chose_color(vars, x, y, i);
 }
 
+static long double	ft_fabs(long double x)
+{
+	if (x < 0)
+		return (-x);
+	return (x);
+}
+
 void	burning_ship(t_vars *vars, int x, int y)
 {
-	t_complex	z;
-	t_complex	o;
-	double		tmp;
-	int			i;
+	t_complex		z;
+	t_complex		o;
+	long double		tmp;
+	int				i;
 
 	o.re = 0;
 	o.im = 0;
@@ -74,7 +81,7 @@ void	burning_ship(t_vars *vars, int x, int y)
 	while (o.re * o.re + o.im * o.im <= 4 && i < vars->max_iter)
 	{
 		tmp = o.re * o.re - o.im * o.im + z.re;
-		o.im = 2 * fabs(o.re * o.im) + z.im;
+		o.im = 2 * ft_fabs(o.re * o.im) + z.im;
 		o.re = tmp;
 		i++;
 	}
