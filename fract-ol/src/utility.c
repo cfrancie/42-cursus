@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utility.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adl <adl@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 21:47:37 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/12/13 22:32:31 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/12/28 02:53:04 by adl              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ long double	ft_atof(const char *str)
 	int			sign;
 
 	res = 0;
-	dec = 0.1;
+	dec = 0;
 	sign = 1;
 	while (*str == ' ' || (*str >= 9 && *str <= 13))
 		str++;
@@ -38,13 +38,13 @@ long double	ft_atof(const char *str)
 	if (*str == '-' || *str == '+')
 		str++;
 	while (*str >= '0' && *str <= '9')
-		res = res * 10 + (*str++ - '0');
+		res = res * 10 + *str++ - '0';
 	if (*str == '.')
 		str++;
 	while (*str >= '0' && *str <= '9')
 	{
-		res += (*str++ - '0') * dec;
-		dec *= 0.1;
+		dec = dec * 10 + *str++ - '0';
+		res += dec / 10;
 	}
 	return (res * sign);
 }
@@ -74,7 +74,7 @@ char	*ft_itoa(int n)
 	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (NULL);
-	str[len + 1] = '\0';
+	str[len] = '\0';
 	nbr = n;
 	if (nbr < 0)
 	{

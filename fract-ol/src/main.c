@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adl <adl@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 21:57:31 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/12/13 22:33:42 by cfrancie         ###   ########.fr       */
+/*   Updated: 2022/12/28 02:57:03 by adl              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	put_text(t_vars *vars)
 		ft_itoa(vars->max_iter));
 }
 
-static ssize_t	print_param(void)
+void	print_param(void)
 {
-	return (write(1, "Usage: ./fractol [OPTION...] [SECTION]\n\t \
-	mandelbrot\tz² + c\n\tjulia\tz² - 1.4\n\tburning_ship\tz² + abs(c)\n", 104));
+	write(1, "Usage: ./fractol [OPTION...] [SECTION]\n\tmandelbrot\tz² + c", 58);
+	write(1, "\n\tjulia\tz² - 1.4\n\tburning_ship\tz² + abs(c)\n", 45);
 }
 
 void	init_vars(t_vars *vars)
@@ -58,9 +58,7 @@ int	main(int argc, char **argv)
 {
 	t_vars	vars;
 
-	if ((argc != 2 && argc != 3) && (!ft_strcmp(argv[1], "mandelbrot")
-			|| !ft_strcmp(argv[1], "julia")
-			|| !ft_strcmp(argv[1], "burning_ship")))
+	if (argc != 2 && argc != 3)
 	{
 		print_param();
 		return (0);
@@ -77,6 +75,11 @@ int	main(int argc, char **argv)
 		vars.type = 3;
 		vars.c.re = ft_atof(argv[2]);
 		vars.c.im = ft_atof(argv[3]);
+	}
+	else
+	{
+		print_param();
+		return (0);
 	}
 	start(&vars);
 	return (0);

@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -O3 -Wall -Wextra -Werror
 INC		= -I./include/ -I./minilibx-linux
 OBJDIR	= ./obj/
 SRCDIR	= ./src/
