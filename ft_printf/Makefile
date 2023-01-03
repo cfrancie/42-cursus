@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+         #
+#    By: cfrancie@student.42.fr <cfrancie>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 14:18:42 by cfrancie          #+#    #+#              #
-#    Updated: 2022/11/25 15:39:43 by cfrancie         ###   ########.fr        #
+#    Updated: 2023/01/02 21:11:21 by cfrancie@st      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,6 @@ all: $(NAME)
 
 $(NAME):	$(OBJS)
 	ar rcs $(NAME) $(OBJS)
-
 
 clean:
 	rm -f $(OBJS)

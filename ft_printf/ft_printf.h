@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cfrancie@student.42.fr <cfrancie>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 14:15:41 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/22 14:35:46 by cfrancie         ###   ########.fr       */
+/*   Updated: 2023/01/02 21:12:37 by cfrancie@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		ft_putstr(char *str);
 int		ft_puthexa(unsigned long n, int is_upper);
 
 // ft_libft.c
-int		ft_strlen(const char *str);
+size_t	ft_strlen(const char *str);
 char	*ft_itoa(long n);
 
 // ft_printf.c

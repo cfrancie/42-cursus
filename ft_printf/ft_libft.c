@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_libft.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cfrancie@student.42.fr <cfrancie>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 00:16:34 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/22 00:58:26 by cfrancie         ###   ########.fr       */
+/*   Updated: 2023/01/02 21:13:04 by cfrancie@st      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_strlen(const char *str)
+size_t	ft_strlen(const char *str)
 {
-	int	i;
+	const char	*ptr;
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	ptr = str;
+	while (*ptr)
+		ptr++;
+	return (ptr - str);
 }
 
 static int	ft_intlen(long n)
