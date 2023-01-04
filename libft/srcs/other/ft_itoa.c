@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 17:32:52 by cfrancie          #+#    #+#             */
-/*   Updated: 2023/01/04 18:19:00 by cfrancie         ###   ########.fr       */
+/*   Updated: 2023/01/04 22:17:37 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	ft_abs(int n)
 char	*ft_itoa(int n)
 {
 	char	*str;
-	int		i;
+	int8_t	i;
 	bool	neg;
 
 	i = ft_intlen(n);
