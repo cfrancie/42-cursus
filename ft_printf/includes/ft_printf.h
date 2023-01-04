@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cfrancie@student.42.fr <cfrancie>          +#+  +:+       +#+        */
+/*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 14:15:41 by cfrancie          #+#    #+#             */
-/*   Updated: 2023/01/02 21:12:37 by cfrancie@st      ###   ########.fr       */
+/*   Updated: 2023/01/04 23:27:54 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,19 @@
 // va_start, va_arg, va_end, va_copy
 # include <stdarg.h> 
 
-// ft_putall.c
-int		ft_putchar(char c);
-int		ft_putstr(char *str);
-int		ft_puthexa(unsigned long n, int is_upper);
+# include <stdbool.h>
 
-// ft_libft.c
-size_t	ft_strlen(const char *str);
-char	*ft_itoa(long n);
+# include "../lib/libft/libft.h"
 
 // ft_printf.c
-int		ft_puthexa_main(unsigned long n, int is_upper);
-int		ft_putnbr_main(long n, int is_unsigned);
-int		ft_putall(const char *str, va_list ap, int i);
-int		ft_printf(const char *str, ...);
+int	ft_puthexa_main(unsigned long n, bool is_upper);
+int	ft_putnbr_main(long n, bool is_unsigned);
+int	ft_putall(const char *str, va_list ap, int i);
+int	ft_printf(const char *str, ...);
+
+// ft_putall.c 
+int	ft_putchar_count(char c);
+int	ft_putstr_count(char *str);
+int	ft_puthexa_count(unsigned long n, bool is_upper);
 
 #endif

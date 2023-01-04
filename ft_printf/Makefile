@@ -3,35 +3,48 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cfrancie@student.42.fr <cfrancie>          +#+  +:+       +#+         #
+#    By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 14:18:42 by cfrancie          #+#    #+#              #
-#    Updated: 2023/01/02 21:11:21 by cfrancie@st      ###   ########.fr        #
+#    Updated: 2023/01/04 23:35:02 by cfrancie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror -I.
-NAME		= libftprintf.a
+NAME	= libftprintf.a
 
-SRCS		= ft_printf.c ft_libft.c ft_putall.c
+CC		= gcc
+CLFAGS	= -Wall -Wextra -Werror
 
-OBJS		= $(SRCS:.c=.o)
+SRCS 	= ./srcs/
+OBJS 	= ./objs/
+LIB 	= ./lib/libft
+
+CFILE	= ${SRCS}ft_printf.c ${SRCS}ft_putall.c
+OFILE	= $(CFILE:$(SRCS)%.c=$(OBJS)%.o)
 
 all: $(NAME)
 
-.c.o:
-	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+$(NAME): $(OFILE)
+	@make -C $(LIB)
+	@cp $(LIB)/libft.a $(NAME)
+	@ar rc $(NAME) $(OFILE)
+	@ranlib $(NAME)
 
-$(NAME):	$(OBJS)
-	ar rcs $(NAME) $(OBJS)
+$(OBJS)%.o: $(SRCS)%.c
+	@mkdir -p $(OBJS)
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo -e "\033[32m[`expr $$(expr $$(find $(OBJS) -name "*.o" | wc -l) \* 100) / $$(find $(SRCS) -name "*.c" | wc -l)`%]\033[0m Compilation de \033[33m$<\033[0m"
 
 clean:
-	rm -f $(OBJS)
+	@make clean -C $(LIB)
+	@rm -rf $(OBJS)
+	@echo -e "\033[31mSuppression des fichiers objets\033[0m"
 
 fclean: clean
-	rm -f $(NAME)
+	@make fclean -C $(LIB)
+	@rm -f $(NAME)
+	@echo -e "\033[31mSuppression de $(NAME)\033[0m"
 
-re: fclean $(NAME)
+re: fclean all
 
 .PHONY: all clean fclean re

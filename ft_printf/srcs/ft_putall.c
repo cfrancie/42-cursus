@@ -6,18 +6,18 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 00:15:40 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/11/22 14:35:52 by cfrancie         ###   ########.fr       */
+/*   Updated: 2023/01/04 22:55:15 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../includes/ft_printf.h"
 
-int	ft_putchar(char c)
+int	ft_putchar_count(char c)
 {
 	return (write(1, &c, 1));
 }
 
-int	ft_putstr(char *str)
+int	ft_putstr_count(char *str)
 {
 	int	i;
 
@@ -35,7 +35,7 @@ int	ft_putstr(char *str)
 	return (i);
 }
 
-int	ft_puthexa(unsigned long n, int is_upper)
+int	ft_puthexa_count(unsigned long n, bool is_upper)
 {
 	char	*base;
 	int		i;
@@ -45,7 +45,7 @@ int	ft_puthexa(unsigned long n, int is_upper)
 	if (is_upper)
 		base = "0123456789ABCDEF";
 	if (n >= 16)
-		i += ft_puthexa(n / 16, is_upper);
-	i += ft_putchar(base[n % 16]);
+		i += ft_puthexa_count(n / 16, is_upper);
+	i += ft_putchar_count(base[n % 16]);
 	return (i);
 }
