@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 21:58:42 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/12/01 02:28:25 by cfrancie         ###   ########.fr       */
+/*   Created: 2023/01/02 20:10:07 by adl               #+#    #+#             */
+/*   Updated: 2023/01/05 00:17:15 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "../includes/main.h"
 
-void	ft_putstr_fd(char *s, int fd)
+int	main(int argc, char **argv)
 {
-	write(fd, s, ft_strlen(s));
+	if (argc != 5)
+	{
+		
+		return (1);
+	}
+	ft_putstr_fd(argv[0], 1);
+	return (0);
 }
