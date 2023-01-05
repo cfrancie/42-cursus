@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adl <adl@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 15:11:02 by adl               #+#    #+#             */
-/*   Updated: 2022/12/25 19:28:39 by adl              ###   ########.fr       */
+/*   Updated: 2023/01/05 16:28:31 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,19 @@ void	put_swap_one(int i, t_data *data)
 	switch (i)
 	{
 	case 0:
-        ft_sa(data);
+		ft_sa(data);
 		break;
 	case 1:
 		ft_sb(data);
 		break;
 	case 2:
-        ft_ss(data);
+		ft_ss(data);
 		break;
 	case 3:
-        ft_pa(data);
+		ft_pa(data);
 		break;
 	case 4:
-        ft_pb(data);
+		ft_pb(data);
 		break;
 	default:
 		put_swap_two(i, data);

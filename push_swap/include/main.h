@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adl <adl@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 14:37:23 by adl               #+#    #+#             */
-/*   Updated: 2022/12/25 20:12:39 by adl              ###   ########.fr       */
+/*   Updated: 2023/01/05 16:28:21 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,5 @@ void		*ft_calloc(size_t nmemb, size_t size);
 int			ft_atoi(const char *nptr);
 t_pile		*ft_lstnew(int data);
 t_pile		*ft_lstlast(t_pile *lst);
-
 
 #endif
