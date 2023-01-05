@@ -6,18 +6,11 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 17:32:52 by cfrancie          #+#    #+#             */
-/*   Updated: 2023/01/04 22:17:37 by cfrancie         ###   ########.fr       */
+/*   Updated: 2023/01/05 16:12:57 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../libft.h"
-
-static int	ft_abs(int n)
-{
-	if (n < 0)
-		return (-n);
-	return (n);
-}
 
 char	*ft_itoa(int n)
 {

@@ -6,7 +6,7 @@
 #    By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/08 19:04:31 by cfrancie          #+#    #+#              #
-#    Updated: 2023/01/04 23:39:04 by cfrancie         ###   ########.fr        #
+#    Updated: 2023/01/05 16:19:43 by cfrancie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,8 @@ CFILE	= ${SRCS}string.h/ft_strchr.c ${SRCS}string.h/ft_strnstr.c \
 		${SRCS}other/bonus/ft_lstnew.c ${SRCS}other/bonus/ft_lstadd_back.c \
 		${SRCS}other/bonus/ft_lstmap.c ${SRCS}other/bonus/ft_lstiter.c \
 		${SRCS}other/bonus/ft_lstadd_front.c ${SRCS}other/bonus/ft_lstclear.c \
-		${SRCS}other/bonus/ft_lstsize.c ${SRCS}other/ft_putchar_fd.c
+		${SRCS}other/bonus/ft_lstsize.c ${SRCS}other/ft_putchar_fd.c \
+		${SRCS}other/ft_abs.c ${SRCS}string.h/ft_strcmp.c
 
 OFILE	= $(CFILE:$(SRCS)%.c=$(OBJS)%.o)
 
