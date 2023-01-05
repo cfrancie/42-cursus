@@ -6,11 +6,11 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 22:16:56 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/12/13 22:26:02 by cfrancie         ###   ########.fr       */
+/*   Updated: 2023/01/05 16:11:50 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/main.h"
+#include "../includes/main.h"
 
 int	key_hook(int keycode, t_vars *vars)
 {

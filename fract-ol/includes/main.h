@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 21:55:15 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/12/13 21:53:29 by cfrancie         ###   ########.fr       */
+/*   Updated: 2023/01/05 16:23:08 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 // include libs
 # include "../lib/minilibx-linux/mlx.h"
 # include "../lib/minilibx-linux/mlx_int.h"
+# include "../lib/libft/libft.h"
 
 // define
 # define WIN_WIDTH 800
@@ -81,10 +82,5 @@ int				close_window(t_vars *vars);
 void			mandelbrot(t_vars *vars, int x, int y);
 void			julia(t_vars *vars, int x, int y);
 void			burning_ship(t_vars *vars, int x, int y);
-
-// utility.c
-unsigned char	ft_strcmp(const char *s1, const char *s2);
-long double		ft_atof(const char *str);
-char			*ft_itoa(int n);
 
 #endif

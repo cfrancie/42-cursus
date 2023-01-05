@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adl <adl@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 21:57:31 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/12/28 02:57:03 by adl              ###   ########.fr       */
+/*   Updated: 2023/01/05 16:24:41 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/main.h"
+#include "../includes/main.h"
 
 void	put_text(t_vars *vars)
 {

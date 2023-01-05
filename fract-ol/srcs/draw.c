@@ -6,11 +6,11 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:23:13 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/12/12 16:55:10 by cfrancie         ###   ########.fr       */
+/*   Updated: 2023/01/05 16:11:44 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/main.h"
+#include "../includes/main.h"
 
 static void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color)
 {

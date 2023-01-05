@@ -6,11 +6,11 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:25:44 by cfrancie          #+#    #+#             */
-/*   Updated: 2022/12/13 21:16:32 by cfrancie         ###   ########.fr       */
+/*   Updated: 2023/01/05 16:11:48 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/main.h"
+#include "../includes/main.h"
 
 void	mandelbrot(t_vars *vars, int x, int y)
 {
