@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 21:55:15 by cfrancie          #+#    #+#             */
-/*   Updated: 2023/01/05 16:23:08 by cfrancie         ###   ########.fr       */
+/*   Updated: 2023/01/06 18:22:48 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@
 // include libs
 # include "../lib/minilibx-linux/mlx.h"
 # include "../lib/minilibx-linux/mlx_int.h"
-# include "../lib/libft/libft.h"
+# include "../../libft/libft.h"
 
 // define
-# define WIN_WIDTH 800
-# define WIN_HEIGHT 800
+# define WIN_WIDTH 1000
+# define WIN_HEIGHT 1000
 
 typedef struct s_complex
 {
@@ -66,21 +66,20 @@ typedef struct s_vars
 
 // prototypes
 // main.c
-void			init_vars(t_vars *vars);
-void			put_text(t_vars *vars);
+void	init_vars(t_vars *vars);
 
 // draw.c
-void			chose_color(t_vars *vars, int x, int y, int i);
-void			fractal(t_vars *vars);
+void	chose_color(t_vars *vars, int x, int y, int i);
+void	fractal(t_vars *vars);
 
 // input.c
-int				key_hook(int keycode, t_vars *vars);
-int				mouse_hook(int button, int x, int y, t_vars *vars);
-int				close_window(t_vars *vars);
+int		key_hook(int keycode, t_vars *vars);
+int		mouse_hook(int button, int x, int y, t_vars *vars);
+int		close_window(t_vars *vars);
 
 // generate.c
-void			mandelbrot(t_vars *vars, int x, int y);
-void			julia(t_vars *vars, int x, int y);
-void			burning_ship(t_vars *vars, int x, int y);
+void	mandelbrot(t_vars *vars, int x, int y);
+void	julia(t_vars *vars, int x, int y);
+void	burning_ship(t_vars *vars, int x, int y);
 
 #endif

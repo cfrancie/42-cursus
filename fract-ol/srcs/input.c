@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 22:16:56 by cfrancie          #+#    #+#             */
-/*   Updated: 2023/01/05 16:40:48 by cfrancie         ###   ########.fr       */
+/*   Updated: 2023/01/06 18:22:52 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	key_hook(int keycode, t_vars *vars)
 		vars->max_iter = 50;
 	}
 	fractal(vars);
-	put_text(vars);
 	return (0);
 }
 
@@ -55,7 +54,6 @@ int	mouse_hook(int button, int x, int y, t_vars *vars)
 			/ (3 * vars->zoom * WIN_HEIGHT) + vars->move.im;
 	}
 	fractal(vars);
-	put_text(vars);
 	return (0);
 }
 
