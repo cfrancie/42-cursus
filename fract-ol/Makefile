@@ -6,32 +6,35 @@
 #    By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/13 21:35:32 by cfrancie          #+#    #+#              #
-#    Updated: 2023/01/06 17:58:30 by cfrancie         ###   ########.fr        #
+#    Updated: 2023/01/06 21:07:18 by cfrancie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= fractol
 
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -O3 -g3 -fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror -O3 -g3
 
 SRCS 	= ./srcs/
 OBJS 	= ./objs/
 LIBFT 	= ../libft/
 LIBX	= ./lib/minilibx-linux
 
-CFILE	=	${SRCS}draw.c ${SRCS}generate.c ${SRCS}input.c ${SRCS}main.c
+CFILE	= ${SRCS}draw.c ${SRCS}generate.c ${SRCS}input.c ${SRCS}main.c
 
 OFILE	= $(CFILE:$(SRCS)%.c=$(OBJS)%.o)
 
 all: $(NAME)
 
-$(NAME): $(OFILE)
-	@make -C $(LIBFT)
-	@make -C $(LIBX)
+$(NAME): $(OFILE) ../libft/libft.a lib/minilibx-linux/libmlx.a
 	@$(CC) $(CFLAGS) -o $(NAME) $(OFILE) -L $(LIBFT) -lft -L $(LIBX) -lmlx -lXext -lX11 -lm -lbsd
 	@echo "\033[32m----------------[\033[33m$(NAME)\033[32m is compiled]----------------\033[0m"
 
+../libft/libft.a:
+	@make -C $(LIBFT)
+
+lib/minilibx-linux/libmlx.a:
+	@make -C $(LIBX)
 
 $(OBJS)%.o: $(SRCS)%.c
 	@mkdir -p $(OBJS)

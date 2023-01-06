@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 22:16:56 by cfrancie          #+#    #+#             */
-/*   Updated: 2023/01/06 18:22:52 by cfrancie         ###   ########.fr       */
+/*   Updated: 2023/01/06 20:44:16 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	key_hook(int keycode, t_vars *vars)
 {
+	printf("%i\n", keycode);
 	if (keycode == 65362)
 		vars->move.im -= 0.1 / vars->zoom;
 	else if (keycode == 65364)
@@ -23,19 +24,18 @@ int	key_hook(int keycode, t_vars *vars)
 	else if (keycode == 65363)
 		vars->move.re += 0.1 / vars->zoom;
 	else if (keycode == 65307)
-	{
-		mlx_loop_end(vars->mlx_ptr);
-		mlx_destroy_display(vars->mlx_ptr);
-		free(vars->mlx_ptr);
-		exit(0);
-	}
-	else if (keycode == 65470)
+		close_window(vars);
+	else if (keycode == 114)
 	{
 		vars->zoom = 1;
 		vars->move.re = 0;
 		vars->move.im = 0;
 		vars->max_iter = 50;
 	}
+	else if (keycode == 65451)
+		vars->max_iter += 10;
+	else if (keycode == 65453 && vars->max_iter > 10)
+		vars->max_iter -= 10;
 	fractal(vars);
 	return (0);
 }
@@ -60,7 +60,5 @@ int	mouse_hook(int button, int x, int y, t_vars *vars)
 int	close_window(t_vars *vars)
 {
 	mlx_loop_end(vars->mlx_ptr);
-	mlx_destroy_display(vars->mlx_ptr);
-	free(vars->mlx_ptr);
-	exit(0);
+	return (0);
 }
