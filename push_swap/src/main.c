@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adl <adl@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 14:44:02 by adl               #+#    #+#             */
-/*   Updated: 2022/12/25 19:37:10 by adl              ###   ########.fr       */
+/*   Updated: 2023/01/06 18:06:34 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	read_argv(char **argv, t_data *pile)
 	}
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_data	*data;
 
@@ -42,7 +42,7 @@ int main(int argc, char **argv)
 			return (0);
 		}
 		sort(data);
-        exit_andfree(data);
+		exit_andfree(data);
 	}
 	else
 		ft_putstr("Error\n");
