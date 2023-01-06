@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 10:57:07 by cfrancie          #+#    #+#             */
-/*   Updated: 2023/01/05 16:25:18 by cfrancie         ###   ########.fr       */
+/*   Updated: 2023/01/06 18:27:03 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int		ft_abs(int n);
 int		ft_intlen(int n);
 char	*ft_itoa(int n);
+long double	ft_ldabs(long double n);
 bool	ft_max(int a, int b);
 bool	ft_min(int a, int b);
 void	ft_putchar_fd(char c, int fd);

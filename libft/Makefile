@@ -6,7 +6,7 @@
 #    By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/08 19:04:31 by cfrancie          #+#    #+#              #
-#    Updated: 2023/01/05 16:19:43 by cfrancie         ###   ########.fr        #
+#    Updated: 2023/01/06 18:26:55 by cfrancie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ CFILE	= ${SRCS}string.h/ft_strchr.c ${SRCS}string.h/ft_strnstr.c \
 		${SRCS}other/bonus/ft_lstmap.c ${SRCS}other/bonus/ft_lstiter.c \
 		${SRCS}other/bonus/ft_lstadd_front.c ${SRCS}other/bonus/ft_lstclear.c \
 		${SRCS}other/bonus/ft_lstsize.c ${SRCS}other/ft_putchar_fd.c \
-		${SRCS}other/ft_abs.c ${SRCS}string.h/ft_strcmp.c
+		${SRCS}other/ft_abs.c ${SRCS}string.h/ft_strcmp.c ${SRCS}other/ft_ldabs.c \
 
 OFILE	= $(CFILE:$(SRCS)%.c=$(OBJS)%.o)
 
@@ -58,21 +58,21 @@ all: $(NAME)
 $(NAME): $(OFILE)
 	@ar rc $(NAME) $(OFILE)
 	@ranlib $(NAME)
+	@echo "\033[32m----------------[\033[33m$(NAME)\033[32m is compiled]----------------\033[0m"
 
 $(OBJS)%.o: $(SRCS)%.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
-	@echo -e "\033[32m[`expr $$(expr $$(find $(OBJS) -name "*.o" | wc -l) \* 100) / $$(find $(SRCS) -name "*.c" | wc -l)`%]\033[0m Compilation of \033[33m$<\033[0m"
+	@echo "\033[32m[`expr $$(expr $$(find $(OBJS) -name "*.o" | wc -l) \* 100) / $$(find $(SRCS) -name "*.c" | wc -l)`%]\033[0m Compilation of \033[33m$<\033[0m"
 
 clean:
 	@rm -rf $(OBJS)
-	@echo -e "\033[31m$(OBJS) deleted\033[0m"
+	@echo "\033[31m$(OBJS) deleted\033[0m"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo -e "\033[31m$(NAME) deleted\033[0m"
+	@echo "\033[31m$(NAME) deleted\033[0m"
 
 re: fclean all
-	@echo -e "\033[32m$(NAME) recompiled\033[0m"
 
 .PHONY: all clean fclean re
