@@ -6,13 +6,13 @@
 #    By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/02 20:02:10 by adl               #+#    #+#              #
-#    Updated: 2023/01/05 00:28:49 by cfrancie         ###   ########.fr        #
+#    Updated: 2023/01/07 01:20:34 by cfrancie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= pipex
 
-CC 		= gcc
+CC 		= cc
 CFLAGS	= -Wall -Wextra -Werror
 
 SRCS	= ./srcs/
