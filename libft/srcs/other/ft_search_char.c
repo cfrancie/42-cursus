@@ -1,42 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atof.c                                          :+:      :+:    :+:   */
+/*   ft_search_char.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/11 02:04:19 by cfrancie          #+#    #+#             */
-/*   Updated: 2023/01/08 03:57:31 by cfrancie         ###   ########.fr       */
+/*   Created: 2023/01/08 03:14:53 by cfrancie          #+#    #+#             */
+/*   Updated: 2023/01/08 03:20:17 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../libft.h"
 
-long double	ft_atof(const char *str)
+bool	ft_search_char(const char *s, char c)
 {
-	long double		res;
-	long double		pow;
-	int				sign;
-
-	res = 0;
-	pow = 1;
-	sign = 1;
-	while (ft_isspace(*str))
-		str++;
-	if (*str == '-' || *str == '+')
+	while (*s)
 	{
-		if (*str == '-')
-			sign = -1;
-		str++;
+		if (c == *s)
+			return (true);
+		s++;
 	}
-	while (ft_isdigit(*str))
-		res = res * 10 + (*str++ - '0');
-	if (*str == '.')
-		str++;
-	while (ft_isdigit(*str))
-	{
-		res = res * 10 + (*str++ - '0');
-		pow *= 10;
-	}
-	return (res * sign / pow);
+	return (false);
 }
