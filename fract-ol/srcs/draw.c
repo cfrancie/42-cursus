@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:23:13 by cfrancie          #+#    #+#             */
-/*   Updated: 2023/01/05 16:11:44 by cfrancie         ###   ########.fr       */
+/*   Updated: 2023/01/08 04:21:04 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,13 @@ static void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-static int	lch_coloring(int i, int max_iter)
+// anti aliasing fxaa
+static int	coloring(int i, int max_iter)
 {
-	double		t;
-	int			r;
-	int			g;
-	int			b;
+	double	t;
 
 	t = (double)i / (double)max_iter;
-	r = 9 * (1 - t) * t * t * t * 255;
-	g = 15 * (1 - t) * (1 - t) * t * t * 255;
-	b = 8.5 * (1 - t) * (1 - t) * (1 - t) * t * 255;
-	return (r << 16 | g << 8 | b);
+	return ((int)(9 * (1 - t) * pow(t, 3) * 0xFFFFFF));
 }
 
 void	chose_color(t_vars *vars, int x, int y, int i)
@@ -39,7 +34,7 @@ void	chose_color(t_vars *vars, int x, int y, int i)
 	if (i == vars->max_iter)
 		my_mlx_pixel_put(vars, x, y, 0x000000);
 	else
-		my_mlx_pixel_put(vars, x, y, lch_coloring(i, vars->max_iter));
+		my_mlx_pixel_put(vars, x, y, coloring(i, vars->max_iter));
 }
 
 void	fractal(t_vars *vars)
@@ -55,7 +50,7 @@ void	fractal(t_vars *vars)
 			else if (vars->type == 1 || vars->type == 3)
 				julia(vars, vars->window_pos.x, vars->window_pos.y);
 			else if (vars->type == 2)
-				burning_ship(vars, vars->window_pos.x, vars->window_pos.y);
+				burningship(vars, vars->window_pos.x, vars->window_pos.y);
 			vars->window_pos.x++;
 		}
 		vars->window_pos.y++;

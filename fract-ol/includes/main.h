@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 21:55:15 by cfrancie          #+#    #+#             */
-/*   Updated: 2023/01/06 18:22:48 by cfrancie         ###   ########.fr       */
+/*   Updated: 2023/01/08 04:23:29 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <string.h>
 
 # include <stdint.h>
+# include <math.h>
 
 // include libs
 # include "../lib/minilibx-linux/mlx.h"
@@ -32,8 +33,8 @@
 # include "../../libft/libft.h"
 
 // define
-# define WIN_WIDTH 1000
-# define WIN_HEIGHT 1000
+# define WIN_WIDTH 442
+# define WIN_HEIGHT 442
 
 typedef struct s_complex
 {
@@ -66,7 +67,7 @@ typedef struct s_vars
 
 // prototypes
 // main.c
-void	init_vars(t_vars *vars);
+void	init_vars(t_vars *vars, t_complex tmp, int fractal_type);
 
 // draw.c
 void	chose_color(t_vars *vars, int x, int y, int i);
@@ -80,6 +81,6 @@ int		close_window(t_vars *vars);
 // generate.c
 void	mandelbrot(t_vars *vars, int x, int y);
 void	julia(t_vars *vars, int x, int y);
-void	burning_ship(t_vars *vars, int x, int y);
+void	burningship(t_vars *vars, int x, int y);
 
 #endif
