@@ -6,7 +6,7 @@
 #    By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/13 21:35:32 by cfrancie          #+#    #+#              #
-#    Updated: 2023/01/08 04:25:50 by cfrancie         ###   ########.fr        #
+#    Updated: 2023/01/09 19:03:13 by cfrancie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,15 +15,15 @@ NAME	= fractol
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror -O3
 
-#valgrind --leak-check=full --track-origins=yes --show-reachable=yes --num-callers=20 -s
-
+#valgrind --leak-check=full --track-origins=yes --show-reachable=yes
 SRCS 	= ./srcs/
 OBJS 	= ./objs/
-LIBFT 	= ../libft
-LIBX	= ./lib/minilibx-linux
+LIBFT 	= ./libft
+LIBX	= ./minilibx-linux
 
 CFILE	= ${SRCS}draw.c ${SRCS}input.c ${SRCS}main.c \
 		${SRCS}mandelbrot.c ${SRCS}julia.c ${SRCS}burningship.c \
+		${SRCS}utility.c
 
 OFILE	= $(CFILE:$(SRCS)%.c=$(OBJS)%.o)
 

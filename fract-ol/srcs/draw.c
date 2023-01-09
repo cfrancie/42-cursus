@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:23:13 by cfrancie          #+#    #+#             */
-/*   Updated: 2023/01/08 04:21:04 by cfrancie         ###   ########.fr       */
+/*   Updated: 2023/01/09 19:04:34 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	coloring(int i, int max_iter)
 	double	t;
 
 	t = (double)i / (double)max_iter;
-	return ((int)(9 * (1 - t) * pow(t, 3) * 0xFFFFFF));
+	return ((int)(9 * (1 - t) * (t * t * t) * 0xFFFFFF));
 }
 
 void	chose_color(t_vars *vars, int x, int y, int i)
@@ -47,7 +47,7 @@ void	fractal(t_vars *vars)
 		{
 			if (vars->type == 0)
 				mandelbrot(vars, vars->window_pos.x, vars->window_pos.y);
-			else if (vars->type == 1 || vars->type == 3)
+			else if (vars->type == 1)
 				julia(vars, vars->window_pos.x, vars->window_pos.y);
 			else if (vars->type == 2)
 				burningship(vars, vars->window_pos.x, vars->window_pos.y);

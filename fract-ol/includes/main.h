@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 21:55:15 by cfrancie          #+#    #+#             */
-/*   Updated: 2023/01/08 04:23:29 by cfrancie         ###   ########.fr       */
+/*   Updated: 2023/01/09 20:43:16 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@
 # include <math.h>
 
 // include libs
-# include "../lib/minilibx-linux/mlx.h"
-# include "../lib/minilibx-linux/mlx_int.h"
-# include "../../libft/libft.h"
+# include "../minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx_int.h"
+# include "../libft/libft.h"
 
 // define
-# define WIN_WIDTH 442
-# define WIN_HEIGHT 442
+# define WIN_WIDTH	500
+# define WIN_HEIGHT	500
 
 typedef struct s_complex
 {
@@ -44,8 +44,8 @@ typedef struct s_complex
 
 typedef struct s_screen
 {
-	int			x;
-	int			y;
+	int				x;
+	int				y;
 }	t_screen;
 
 typedef struct s_vars
@@ -67,7 +67,10 @@ typedef struct s_vars
 
 // prototypes
 // main.c
-void	init_vars(t_vars *vars, t_complex tmp, int fractal_type);
+bool	print_param(void);
+bool	init(t_vars *vars, t_complex tmp, int fractal_type);
+void	start(t_vars *vars);
+bool	set_input(int argc, char **argv, t_vars *vars);
 
 // draw.c
 void	chose_color(t_vars *vars, int x, int y, int i);
@@ -78,7 +81,10 @@ int		key_hook(int keycode, t_vars *vars);
 int		mouse_hook(int button, int x, int y, t_vars *vars);
 int		close_window(t_vars *vars);
 
-// generate.c
+// utility.c
+bool	set_julia(int argc, char **argv, t_vars *vars);
+
+// generation
 void	mandelbrot(t_vars *vars, int x, int y);
 void	julia(t_vars *vars, int x, int y);
 void	burningship(t_vars *vars, int x, int y);
