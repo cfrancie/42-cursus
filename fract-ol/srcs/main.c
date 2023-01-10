@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 21:57:31 by cfrancie          #+#    #+#             */
-/*   Updated: 2023/01/09 20:49:11 by cfrancie         ###   ########.fr       */
+/*   Updated: 2023/01/10 05:19:15 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 bool	print_param(void)
 {
-	ft_putstr("Usage: ./fractol [SECTION]\n\tmandelbrot\tz² + c \
-		\n\tjulia\t\tz² - 1.4\n\tburningship\tz² + abs(c)\n");
+	ft_putstr("Usage: ./fractol [SECTION] [OPTION...]\nSECTION:\
+	\n\tmandelbrot\n\tjulia\n\tburningship\nOPTIONS:\
+	\n\t-i=[ITERATION]\t\t: set the number of iteration\n\t-c=[COMPLEX]\
+	\t: set the complex number (Re + Im) (Julia only)\n");
 	return (false);
 }
 
-bool	init(t_vars *vars, t_complex tmp, int fractal_type)
+bool	init(t_vars *vars, t_complex tmp, int fractal_type, int iter)
 {
 	vars->mlx_ptr = mlx_init();
 	if (!vars->mlx_ptr)
@@ -32,7 +34,7 @@ bool	init(t_vars *vars, t_complex tmp, int fractal_type)
 	vars->addr = mlx_get_data_addr(vars->img_ptr, &vars->bits_per_pixel, \
 		&vars->line_length, &vars->endian);
 	vars->zoom = 0.5;
-	vars->max_iter = 70;
+	vars->max_iter = iter;
 	vars->window_pos.x = 0;
 	vars->window_pos.y = 0;
 	vars->c.re = tmp.re;
@@ -58,34 +60,51 @@ void	start(t_vars *vars)
 
 bool	set_input(int argc, char **argv, t_vars *vars)
 {
-	bool	edit;
+	size_t		i;
+	int			iter;
+	int			type;
+	t_complex	tmp;
 
-	edit = false;
-	if (argc < 2 || argc > 5)
+	type = -1;
+	iter = 70;
+	tmp.re = -0.7;
+	tmp.im = 0.27015;
+	i = 1;
+	type = type_init(argc, argv);
+	if (type != -1 && argc > 2)
+	{
+		while (argv[i])
+		{
+			// if argv[i] start with -i= set iter
+			if (argv[i][0] == '-' && argv[i][1] == 'i' && argv[i][2] == '=')
+				iter = ft_atoi(argv[i] + 3);
+			// if argv[i] start with -re= set a real number
+			if (argv[i][0] == '-' && argv[i][1] == 'r' && argv[i][1] == 'e' \
+				&& argv[i][2] == '=')
+				tmp.re = ft_atof(argv[i] + 4);
+			if (argv[i][0] == '-' && argv[i][1] == 'i' && argv[i][1] == 'm' \
+				&& argv[i][2] == '=')
+				tmp.im = ft_atof(argv[i] + 4);
+			i++;
+		}
+	}
+	printf("%d %d %Lf %Lf", type, iter, tmp.re, tmp.im);
+	if (type == -1)
 		return (print_param());
-	if ((argc == 2 || argc == 3) && !ft_strcmp(argv[1], "mandelbrot"))
-		edit = init(vars, (t_complex){0.0, 0.0}, 0);
-	if ((argc == 2 || argc == 3) && !ft_strcmp(argv[1], "burningship"))
-		edit = init(vars, (t_complex){0.0, 0.0}, 2);
-	if (argc == 3 && ft_atoi(argv[2]) && edit)
-		vars->max_iter = ft_atoi(argv[2]);
-	else if ((argc >= 2 && argc <= 5) && !ft_strcmp(argv[1], "julia"))
-		edit = set_julia(argc, argv, vars);
-	else
-		return (print_param());
-	return (true);
+	return (init(vars, tmp, type, iter));
 }
 
 int	main(int argc, char **argv)
 {
 	t_vars	vars;
 
-	if (check_argv(argc, argv, &vars))
+	if (set_input(argc, argv, &vars))
 		start(&vars);
 	return (0);
 }
 
 /*
+./fractol julia 0.0 0.0 100
 1 arg:
 	- mandelbrot
 		- option iter max ?

@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 21:55:15 by cfrancie          #+#    #+#             */
-/*   Updated: 2023/01/09 20:43:16 by cfrancie         ###   ########.fr       */
+/*   Updated: 2023/01/10 05:23:06 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@
 # include "../libft/libft.h"
 
 // define
-# define WIN_WIDTH	500
-# define WIN_HEIGHT	500
+# define WIN_WIDTH		500
+# define WIN_HEIGHT		500
 
 typedef struct s_complex
 {
@@ -67,26 +67,29 @@ typedef struct s_vars
 
 // prototypes
 // main.c
-bool	print_param(void);
-bool	init(t_vars *vars, t_complex tmp, int fractal_type);
-void	start(t_vars *vars);
-bool	set_input(int argc, char **argv, t_vars *vars);
+bool		print_param(void);
+bool		init(t_vars *vars, t_complex tmp, int fractal_type, int iter);
+void		start(t_vars *vars);
+bool		set_input(int argc, char **argv, t_vars *vars);
 
 // draw.c
-void	chose_color(t_vars *vars, int x, int y, int i);
-void	fractal(t_vars *vars);
+void		chose_color(t_vars *vars, int x, int y, int i);
+void		fractal(t_vars *vars);
 
 // input.c
-int		key_hook(int keycode, t_vars *vars);
-int		mouse_hook(int button, int x, int y, t_vars *vars);
-int		close_window(t_vars *vars);
+int			key_hook(int keycode, t_vars *vars);
+int			mouse_hook(int button, int x, int y, t_vars *vars);
+int			close_window(t_vars *vars);
 
 // utility.c
-bool	set_julia(int argc, char **argv, t_vars *vars);
+int			atoi_index(char *str, int i);
+long double	atof_index(char *str, int i);
+int			type_init(int argc, char **argv);
+long double	ft_atof_index(const char *str);
 
 // generation
-void	mandelbrot(t_vars *vars, int x, int y);
-void	julia(t_vars *vars, int x, int y);
-void	burningship(t_vars *vars, int x, int y);
+void		mandelbrot(t_vars *vars, int x, int y);
+void		julia(t_vars *vars, int x, int y);
+void		burningship(t_vars *vars, int x, int y);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 02:44:31 by cfrancie          #+#    #+#             */
-/*   Updated: 2023/01/08 03:35:33 by cfrancie         ###   ########.fr       */
+/*   Updated: 2023/01/09 23:10:17 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	julia(t_vars *vars, int x, int y)
 		tmp = z.re * z.re - z.im * z.im + vars->c.re;
 		z.im = 2 * z.re * z.im + vars->c.im;
 		z.re = tmp;
-		i++;
+		++i;
 	}
 	chose_color(vars, x, y, i);
 }

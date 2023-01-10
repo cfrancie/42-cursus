@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 02:43:37 by cfrancie          #+#    #+#             */
-/*   Updated: 2023/01/08 02:44:43 by cfrancie         ###   ########.fr       */
+/*   Updated: 2023/01/09 23:10:10 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	mandelbrot(t_vars *vars, int x, int y)
 		tmp = o.re * o.re - o.im * o.im + z.re;
 		o.im = 2 * o.re * o.im + z.im;
 		o.re = tmp;
-		i++;
+		++i;
 	}
 	chose_color(vars, x, y, i);
 }

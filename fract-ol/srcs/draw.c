@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:23:13 by cfrancie          #+#    #+#             */
-/*   Updated: 2023/01/09 19:04:34 by cfrancie         ###   ########.fr       */
+/*   Updated: 2023/01/09 23:09:58 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void	fractal(t_vars *vars)
 				julia(vars, vars->window_pos.x, vars->window_pos.y);
 			else if (vars->type == 2)
 				burningship(vars, vars->window_pos.x, vars->window_pos.y);
-			vars->window_pos.x++;
+			++vars->window_pos.x;
 		}
-		vars->window_pos.y++;
+		++vars->window_pos.y;
 	}
 	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->img_ptr, 0, 0);
 }
