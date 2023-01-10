@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 21:55:15 by cfrancie          #+#    #+#             */
-/*   Updated: 2023/01/10 18:11:17 by cfrancie         ###   ########.fr       */
+/*   Updated: 2023/01/11 00:22:07 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,8 @@
 # include "../libft/libft.h"
 
 // define
-# define WIN_WIDTH		500
-# define WIN_HEIGHT		500
-# define COLOR_MAX		255
+# define WIN_WIDTH		542
+# define WIN_HEIGHT		542
 
 typedef struct s_color
 {

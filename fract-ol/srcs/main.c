@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 21:57:31 by cfrancie          #+#    #+#             */
-/*   Updated: 2023/01/10 18:05:09 by cfrancie         ###   ########.fr       */
+/*   Updated: 2023/01/11 00:01:16 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ bool	print_param(void)
 {
 	ft_putstr("Usage: ./fractol [SECTION] [OPTION...]\nSECTION:\
 	\n\tmandelbrot\n\tjulia\n\tburningship\nOPTIONS:\
-	\n\t-i=[ITERATION]\t\t: set the number of iteration (∈ ℕ)\n\t-re=[Real] -im=[Im]\
-	: set the complex number (Re + Im) (julia only)\n");
+	\n\t-i=[ITERATION]\t\t: set the number of iteration (∈ ℕ)\n\t\
+	-re=[Real] -im=[Im]: set the complex number (Re + Im) (julia only)\n");
 	return (false);
 }
 

@@ -6,7 +6,7 @@
 #    By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/13 21:35:32 by cfrancie          #+#    #+#              #
-#    Updated: 2023/01/09 22:44:03 by cfrancie         ###   ########.fr        #
+#    Updated: 2023/01/11 00:15:40 by cfrancie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,11 @@ CFLAGS	= -Wall -Wextra -Werror -O3
 #valgrind --leak-check=full --track-origins=yes --show-reachable=yes
 SRCS 	= ./srcs/
 OBJS 	= ./objs/
-LIBFT 	= ./libft
-LIBX	= ./minilibx-linux
+LIBFT 	= ./libft/
+LIBX	= ./minilibx-linux/
 
-CFILE	= ${SRCS}draw.c ${SRCS}input.c ${SRCS}main.c \
-		${SRCS}mandelbrot.c ${SRCS}julia.c ${SRCS}burningship.c \
-		${SRCS}utility.c
+CFILE	= $(SRCS)burningship.c $(SRCS)draw.c $(SRCS)input.c $(SRCS)julia.c \
+		$(SRCS)main.c $(SRCS)mandelbrot.c $(SRCS)utility.c
 
 OFILE	= $(CFILE:$(SRCS)%.c=$(OBJS)%.o)
 
@@ -33,7 +32,7 @@ $(NAME): $(OFILE)
 	@make -C $(LIBFT)
 	@make -C $(LIBX)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OFILE) -L $(LIBFT) -lft -L $(LIBX) -lmlx -lXext -lX11 -lm -lbsd
-	@echo -e "\033[32mCompilation de $(NAME)\033[0m"
+	@echo -e "\033[32m----------------[\033[33m$(NAME)\033[32m is compiled]----------------\033[0m"
 
 $(OBJS)%.o: $(SRCS)%.c
 	@mkdir -p $(OBJS)
@@ -44,14 +43,13 @@ clean:
 	@make clean -C $(LIBFT)
 	@make clean -C $(LIBX)
 	@rm -rf $(OBJS)
-	@echo -e "\033[31mSuppression des fichiers objets\033[0m"
+	@echo -e "\033[31m----------------[\033[33m$(OBJS)\033[31m deleted]----------------\033[0m"
 
 fclean: clean
 	@make fclean -C $(LIBFT)
 	@rm -f $(NAME)
-	@echo -e "\033[31mSuppression de $(NAME)\033[0m"
-
+	@echo -e "\033[31m----------------[\033[33m$(NAME)\033[31m deleted]----------------\033[0m"
+	
 re: fclean all
-	@echo -e "\033[32mRecompilation de $(NAME)\033[0m"
 
 .PHONY: all clean fclean re

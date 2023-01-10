@@ -6,7 +6,7 @@
 #    By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/08 19:04:31 by cfrancie          #+#    #+#              #
-#    Updated: 2023/01/08 03:16:16 by cfrancie         ###   ########.fr        #
+#    Updated: 2023/01/11 00:23:52 by cfrancie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,11 +101,12 @@ $(OBJS)%.o: $(SRCS)%.c
 
 clean:
 	@rm -rf $(OBJS)
-	@echo -e "\033[31m$(OBJS) deleted\033[0m"
+	@echo -e "\033[31m----------------[\033[33m$(OBJS)\033[31m deleted]----------------\033[0m"
+
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo -e "\033[31m$(NAME) deleted\033[0m"
+	@echo -e "\033[31m----------------[\033[33m$(NAME)\033[31m deleted]----------------\033[0m"
 
 re: fclean all
 
