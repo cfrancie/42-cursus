@@ -3,18 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adl <adl@student.42.fr>                    +#+  +:+       +#+         #
+#    By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/21 14:29:24 by adl               #+#    #+#              #
-#    Updated: 2022/12/24 00:53:36 by adl              ###   ########.fr        #
+#    Updated: 2023/01/10 02:53:28 by cfrancie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
-INC		= -I./include/
-OBJDIR	= ./obj/
-SRCDIR	= ./src/
+OBJDIR	= ./objs/
+SRCDIR	= ./srcs/
 
 NAME	= push_swap
 
@@ -23,8 +22,8 @@ SRC		= main.c \
 		swap_00.c \
 		swap_01.c \
 		swap_02.c \
-		sorter.c \
 		utils.c \
+		utils2.c \
 
 SRCS	= $(addprefix $(SRCDIR), $(SRC))
 
@@ -35,7 +34,7 @@ OBJS	= $(addprefix $(OBJDIR), $(OBJ))
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(INC) -o $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -I ./includes/
 	@echo "compilation of $(NAME) done"
 
 $(OBJDIR)%.o: $(SRCDIR)%.c

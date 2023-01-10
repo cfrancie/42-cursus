@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adl <adl@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 16:24:54 by adl               #+#    #+#             */
-/*   Updated: 2022/12/25 20:16:42 by adl              ###   ########.fr       */
+/*   Updated: 2023/01/10 02:51:47 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/main.h"
+#include "../includes/main.h"
 
 t_pile	*ft_lstnew(int data)
 {
@@ -43,11 +43,6 @@ size_t	ft_strlen(const char *str)
 	return (s - str);
 }
 
-void	ft_putstr(const char *str)
-{
-	write(1, str, ft_strlen(str));
-}
-
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void	*ptr;
@@ -65,26 +60,25 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (ptr);
 }
 
-int	ft_atoi(const char *nptr)
+int	ft_atoi(const char *str)
 {
-	int		res;
-	char	sign;
+	int	res;
+	int	sign;
 
 	res = 0;
 	sign = 1;
-	while (*nptr == ' ' || *nptr == '\t' || *nptr == '\n'
-		|| *nptr == '\v' || *nptr == '\f' || *nptr == '\r')
-		++nptr;
-	if (*nptr == '-' || *nptr == '+')
+	while (*str == ' ' || (*str >= 9 && *str <= 13))
+		str++;
+	if (*str == '-' || *str == '+')
 	{
-		if (*nptr == '-')
+		if (*str == '-')
 			sign = -1;
-		++nptr;
+		str++;
 	}
-	while (*nptr >= '0' && *nptr <= '9')
+	while (*str >= '0' && *str <= '9')
 	{
-		res = res * 10 + *nptr - '0';
-		++nptr;
+		res = res * 10 + (*str - '0');
+		str++;
 	}
 	return (res * sign);
 }

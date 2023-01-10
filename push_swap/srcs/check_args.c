@@ -6,61 +6,44 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 15:11:02 by adl               #+#    #+#             */
-/*   Updated: 2023/01/05 16:28:31 by cfrancie         ###   ########.fr       */
+/*   Updated: 2023/01/10 02:46:52 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/main.h"
+#include "../includes/main.h"
 
 void	put_swap_two(int i, t_data *data)
 {
-	switch (i)
-	{
-	case 5:
-		ft_ra(data);
-		break;
-	case 6:
-		ft_rb(data);
-		break;
-	case 7:
+	if (i == 5)
+		ft_ra(data, true);
+	else if (i == 6)
+		ft_rb(data, true);
+	else if (i == 7)
 		ft_rr(data);
-		break;
-	case 8:
-		ft_rra(data);
-		break;
-	case 9:
-		ft_rrb(data);
-		break;
-	case 10:
+	else if (i == 8)
+		ft_rra(data, true);
+	else if (i == 9)
+		ft_rrb(data, true);
+	else if (i == 10)
 		ft_rrr(data);
-		break;
-	default:
-		ft_putstr("Error");
-	}
+	else
+		ft_putstr("Error\n");
 }
 
 void	put_swap_one(int i, t_data *data)
 {
-	switch (i)
-	{
-	case 0:
-		ft_sa(data);
-		break;
-	case 1:
-		ft_sb(data);
-		break;
-	case 2:
+	if (i == 0)
+		ft_sa(data, true);
+	else if (i == 1)
+		ft_sb(data, true);
+	else if (i == 2)
 		ft_ss(data);
-		break;
-	case 3:
+	else if (i == 3)
 		ft_pa(data);
-		break;
-	case 4:
+	else if (i == 4)
 		ft_pb(data);
-		break;
-	default:
+	else
 		put_swap_two(i, data);
-	}
 }
 
 bool	check_double(t_data *data)
@@ -83,20 +66,23 @@ bool	check_double(t_data *data)
 	return (true);
 }
 
-void	exit_andfree(t_data *data)
+void	free_data(t_data *data)
 {
-	while (data->a->next)
+	t_pile	*tmp;
+	t_pile	*tmp2;
+
+	tmp = data->a;
+	while (tmp)
 	{
-		free(data->a->data);
-		data->a = data->a->next;
+		tmp2 = tmp->next;
+		free(tmp);
+		tmp = tmp2;
 	}
-	while (data->b->next)
+	tmp = data->b;
+	while (tmp)
 	{
-		free(data->b->data);
-		data->b = data->b->next;
+		tmp2 = tmp->next;
+		free(tmp);
+		tmp = tmp2;
 	}
-	free(data->a);
-	free(data->b);
-	free(data);
-	exit(0);
 }

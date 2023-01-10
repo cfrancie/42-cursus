@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   swap_01.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adl <adl@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 14:39:10 by adl               #+#    #+#             */
-/*   Updated: 2022/12/25 19:20:13 by adl              ###   ########.fr       */
+/*   Updated: 2023/01/10 02:05:37 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/main.h"
+#include "../includes/main.h"
 
 /*Décale d’une position vers le haut tous les élements de la pile a.
 Le premier élément devient le dernier.*/

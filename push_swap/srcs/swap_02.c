@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   swap_02.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adl <adl@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 15:02:07 by adl               #+#    #+#             */
-/*   Updated: 2022/12/23 23:18:38 by adl              ###   ########.fr       */
+/*   Updated: 2023/01/10 02:49:09 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/main.h"
+#include "../includes/main.h"
 
 /*rra et rrb en même temps*/
-void	ft_rrr(t_pile *pile)
+void	ft_rrr(t_data *data)
 {
-	ft_rra(pile, 0);
-	ft_rrb(pile, 0);
+	ft_rra(data, false);
+	ft_rrb(data, false);
 	ft_putstr("rrr\n");
 }

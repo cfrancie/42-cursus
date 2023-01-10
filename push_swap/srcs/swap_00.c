@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   swap_00.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adl <adl@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 15:00:50 by adl               #+#    #+#             */
-/*   Updated: 2022/12/25 21:59:16 by adl              ###   ########.fr       */
+/*   Updated: 2023/01/10 02:48:48 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/main.h"
+#include "../includes/main.h"
 
 /*Intervertit les 2 premiers éléments au sommet de la pile a.
 Ne fait rien s’il n’y en a qu’un ou aucun*/
@@ -47,8 +47,8 @@ void	ft_sb(t_data *data, bool print)
 /*sa et sb en même temps.*/
 void	ft_ss(t_data *data)
 {
-	ft_sa(data, 0);
-	ft_sb(data, 0);
+	ft_sa(data, false);
+	ft_sb(data, false);
 	ft_putstr("ss\n");
 }
 

@@ -6,11 +6,45 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 14:44:02 by adl               #+#    #+#             */
-/*   Updated: 2023/01/06 18:06:34 by cfrancie         ###   ########.fr       */
+/*   Updated: 2023/01/10 03:10:05 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/main.h"
+#include "../includes/main.h"
+
+void	ft_putstr(const char *str)
+{
+	write(1, str, ft_strlen(str));
+}
+
+void	radix_sort(t_data *data)
+{
+	int		i;
+	int		max;
+	int		*count;
+
+	i = 0;
+	max = ft_lstmax(data->a);
+	count = ft_calloc(max + 1, sizeof(int));
+	while (i <= max)
+	{
+		count[i] = ft_lstcount(data->a, i);
+		i++;
+	}
+	i = 0;
+	while (i <= max)
+	{
+		while (count[i] > 0)
+		{
+			ft_pb(data);
+			if (data->b->data == i)
+				ft_rb(data, false);
+			count[i]--;
+		}
+		i++;
+	}
+	free(count);
+}
 
 void	read_argv(char **argv, t_data *pile)
 {
@@ -30,21 +64,15 @@ void	read_argv(char **argv, t_data *pile)
 
 int	main(int argc, char **argv)
 {
-	t_data	*data;
+	t_data	data;
 
-	if (argc > 1)
-	{
-		read_argv(argv, data);
-		if (!check_double(data) || !data->a || !data->b)
-		{
-			exit_andfree(data);
-			ft_putstr("Error\n");
-			return (0);
-		}
-		sort(data);
-		exit_andfree(data);
-	}
-	else
-		ft_putstr("Error\n");
+	if (argc < 2)
+		return (0);
+	data.a = ft_lstnew(0);
+	data.b = ft_lstnew(0);
+	read_argv(argv, &data);
+	radix_sort(&data);
+	ft_lstclear(&data.a);
+	ft_lstclear(&data.b);
 	return (0);
 }

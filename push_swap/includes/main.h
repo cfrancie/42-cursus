@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 14:37:23 by adl               #+#    #+#             */
-/*   Updated: 2023/01/05 16:28:21 by cfrancie         ###   ########.fr       */
+/*   Updated: 2023/01/10 03:00:20 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_data
 void		put_swap_two(int i, t_data *data);
 void		put_swap_one(int i, t_data *data);
 bool		check_double(t_data *data);
-void		exit_andfree(t_data *data);
+void		exit_free(t_data *data);
 
 // swap_00.c
 void		ft_sa(t_data *data, bool print);
@@ -67,5 +67,11 @@ void		*ft_calloc(size_t nmemb, size_t size);
 int			ft_atoi(const char *nptr);
 t_pile		*ft_lstnew(int data);
 t_pile		*ft_lstlast(t_pile *lst);
+
+// utils2.c
+int			ft_lstmax(t_pile *lst);
+int			ft_lstcount(t_pile *lst, int i);
+void		ft_lstclear(t_pile **lst);
+void		exit_andfree(t_data *data);
 
 #endif
