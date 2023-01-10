@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:23:13 by cfrancie          #+#    #+#             */
-/*   Updated: 2023/01/09 23:09:58 by cfrancie         ###   ########.fr       */
+/*   Updated: 2023/01/10 18:19:41 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,15 @@ static void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color)
 // anti aliasing fxaa
 static int	coloring(int i, int max_iter)
 {
-	double	t;
+	t_color	color;
 
-	t = (double)i / (double)max_iter;
-	return ((int)(9 * (1 - t) * (t * t * t) * 0xFFFFFF));
+	color.r = (int)(9 * (1 - (float)i / max_iter) \
+		* (float)i / max_iter * 255);
+	color.g = (int)(15 * (1 - (float)i / max_iter) \
+		* (float)i / max_iter * 255);
+	color.b = (int)(8.5 * (1 - (float)i / max_iter) \
+		* (float)i / max_iter * 255);
+	return ((color.r << 16) | (color.g << 8) | color.b);
 }
 
 void	chose_color(t_vars *vars, int x, int y, int i)

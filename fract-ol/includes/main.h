@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 21:55:15 by cfrancie          #+#    #+#             */
-/*   Updated: 2023/01/10 05:23:06 by cfrancie         ###   ########.fr       */
+/*   Updated: 2023/01/10 18:11:17 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@
 // define
 # define WIN_WIDTH		500
 # define WIN_HEIGHT		500
+# define COLOR_MAX		255
+
+typedef struct s_color
+{
+	int				r;
+	int				g;
+	int				b;
+}	t_color;
 
 typedef struct s_complex
 {
@@ -82,10 +90,11 @@ int			mouse_hook(int button, int x, int y, t_vars *vars);
 int			close_window(t_vars *vars);
 
 // utility.c
-int			atoi_index(char *str, int i);
-long double	atof_index(char *str, int i);
+int			atoi_index(char *str, int len);
+long double	atof_index(char *str, int len);
 int			type_init(int argc, char **argv);
 long double	ft_atof_index(const char *str);
+void		init_arg(char **argv, t_complex *tmp, int i);
 
 // generation
 void		mandelbrot(t_vars *vars, int x, int y);

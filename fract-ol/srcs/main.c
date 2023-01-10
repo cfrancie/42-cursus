@@ -6,7 +6,7 @@
 /*   By: cfrancie <cfrancie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 21:57:31 by cfrancie          #+#    #+#             */
-/*   Updated: 2023/01/10 05:19:15 by cfrancie         ###   ########.fr       */
+/*   Updated: 2023/01/10 18:05:09 by cfrancie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ bool	print_param(void)
 {
 	ft_putstr("Usage: ./fractol [SECTION] [OPTION...]\nSECTION:\
 	\n\tmandelbrot\n\tjulia\n\tburningship\nOPTIONS:\
-	\n\t-i=[ITERATION]\t\t: set the number of iteration\n\t-c=[COMPLEX]\
-	\t: set the complex number (Re + Im) (Julia only)\n");
+	\n\t-i=[ITERATION]\t\t: set the number of iteration (∈ ℕ)\n\t-re=[Real] -im=[Im]\
+	: set the complex number (Re + Im) (julia only)\n");
 	return (false);
 }
 
@@ -75,21 +75,13 @@ bool	set_input(int argc, char **argv, t_vars *vars)
 	{
 		while (argv[i])
 		{
-			// if argv[i] start with -i= set iter
 			if (argv[i][0] == '-' && argv[i][1] == 'i' && argv[i][2] == '=')
 				iter = ft_atoi(argv[i] + 3);
-			// if argv[i] start with -re= set a real number
-			if (argv[i][0] == '-' && argv[i][1] == 'r' && argv[i][1] == 'e' \
-				&& argv[i][2] == '=')
-				tmp.re = ft_atof(argv[i] + 4);
-			if (argv[i][0] == '-' && argv[i][1] == 'i' && argv[i][1] == 'm' \
-				&& argv[i][2] == '=')
-				tmp.im = ft_atof(argv[i] + 4);
+			init_arg(argv, &tmp, i);
 			i++;
 		}
 	}
-	printf("%d %d %Lf %Lf", type, iter, tmp.re, tmp.im);
-	if (type == -1)
+	if (type == -1 || iter < 0)
 		return (print_param());
 	return (init(vars, tmp, type, iter));
 }
@@ -102,16 +94,3 @@ int	main(int argc, char **argv)
 		start(&vars);
 	return (0);
 }
-
-/*
-./fractol julia 0.0 0.0 100
-1 arg:
-	- mandelbrot
-		- option iter max ?
-	- burningship
-		- option iter max ?
-	- julia
-		- option nombre 1 ?
-		- option nombre 2 ?
-		- option iter max ?
-*/
